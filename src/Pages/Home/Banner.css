@@ -1,0 +1,9 @@
+.carousel .legend {
+  font-size: 2rem; /* Make text bigger */
+  font-weight: bold;
+  background: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+  color: #ffd700; /* Bright yellow */
+  padding: 1rem;
+  border-radius: 8px;
+  bottom: 20px !important; /* Move text up from the bottom */
+}

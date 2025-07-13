@@ -1,7 +1,14 @@
 import React from "react";
+import Banner from "./Banner";
+import Carousel from "./Carousel";
 
 const Home = () => {
-  return <div>This is Home</div>;
+  return (
+    <div className="text-5xl">
+      <Banner></Banner>
+      <Carousel></Carousel>
+    </div>
+  );
 };
 
 export default Home;

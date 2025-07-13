@@ -2,6 +2,7 @@ import React, { use, useContext } from "react";
 import { Link, NavLink } from "react-router";
 import Swal from "sweetalert2";
 import { AuthContext } from "../../Contexts/AuthContext";
+import Logo from "./Logo";
 
 const Navbar = () => {
   const { user, signOutUser } = use(AuthContext);
@@ -101,14 +102,7 @@ const Navbar = () => {
             </ul>
           </div>
           <div className="flex items-center gap-2">
-            <img
-              className="w-[45px] rounded-3xl"
-              src="https://i.ibb.co/TxWwbdBL/book-logo.jpg"
-              alt="logo"
-            />
-            <span className="text-2xl font-bold text-purple-700">
-              Book Heaven
-            </span>
+            <Logo></Logo>
           </div>
         </div>
 
