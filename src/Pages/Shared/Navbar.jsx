@@ -35,16 +35,7 @@ const Navbar = () => {
           Home
         </NavLink>
       </li>
-      <li>
-        <NavLink to="/login" className={linkStyle + " text-green-700"}>
-          LogIn
-        </NavLink>
-      </li>
-      <li>
-        <NavLink to="/register" className={linkStyle + " text-blue-700"}>
-          Register
-        </NavLink>
-      </li>
+
       <li>
         <NavLink to="/bookshelf" className={linkStyle + " text-red-700"}>
           Bookshelf
@@ -55,16 +46,6 @@ const Navbar = () => {
           <li>
             <NavLink to="/myBooks" className={linkStyle + " text-indigo-700"}>
               My Books
-            </NavLink>
-          </li>
-          <li>
-            <NavLink to="/addBook" className={linkStyle + " text-orange-700"}>
-              Add Book
-            </NavLink>
-          </li>
-          <li>
-            <NavLink to="/profile" className={linkStyle + " text-pink-700"}>
-              Profile
             </NavLink>
           </li>
         </>
@@ -102,7 +83,9 @@ const Navbar = () => {
             </ul>
           </div>
           <div className="flex items-center gap-2">
-            <Logo></Logo>
+            <Link to={"/"}>
+              <Logo></Logo>
+            </Link>
           </div>
         </div>
 
