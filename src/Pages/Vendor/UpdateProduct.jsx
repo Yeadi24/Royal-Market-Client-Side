@@ -2,7 +2,7 @@ import React, { useEffect, useState, useContext } from "react";
 import axios from "axios";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-import { useParams } from "react-router";
+import { useNavigate, useParams } from "react-router";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { AuthContext } from "../../Contexts/AuthContext";
@@ -10,7 +10,7 @@ import { AuthContext } from "../../Contexts/AuthContext";
 const UpdateProduct = () => {
   const { id } = useParams();
   const user = useContext(AuthContext);
-
+  const navigate = useNavigate();
   const [marketDate, setMarketDate] = useState(new Date());
   const [imagePreview, setImagePreview] = useState(null);
   const [existingPriceHistory, setExistingPriceHistory] = useState([]);
@@ -42,6 +42,7 @@ const UpdateProduct = () => {
         setMarketDate(new Date(data.date));
         setImagePreview(data.imageUrl);
         setExistingPriceHistory(data.priceHistory || []);
+        navigate("/vendorDashboard/myProducts");
       })
       .catch((error) => {
         console.error("Error loading product:", error);

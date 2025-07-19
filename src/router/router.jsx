@@ -12,6 +12,8 @@ import PrivateRoute from "./PrivateRoute";
 import MyProducts from "../Pages/Vendor/MyProducts";
 import UpdateProduct from "../Pages/Vendor/UpdateProduct";
 import AddAdvertisement from "../Pages/Vendor/AddAdvertisement";
+import MyAdvertisements from "../Pages/Vendor/MyAdvertisements";
+import UpdateAd from "../Pages/Vendor/UpdateAd";
 export const router = createBrowserRouter([
   {
     path: "/",
@@ -84,6 +86,22 @@ export const router = createBrowserRouter([
         element: (
           <PrivateRoute>
             <AddAdvertisement></AddAdvertisement>
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "myAdvertisements",
+        element: (
+          <PrivateRoute>
+            <MyAdvertisements></MyAdvertisements>
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "updateAd/:id",
+        element: (
+          <PrivateRoute>
+            <UpdateAd></UpdateAd>
           </PrivateRoute>
         ),
       },
