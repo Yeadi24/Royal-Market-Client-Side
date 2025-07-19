@@ -1,96 +1,118 @@
-// src/pages/vendor/VendorLayout.jsx
-import React, { useState } from "react";
+import React from "react";
 import { NavLink, Outlet } from "react-router";
-import {
-  Menu,
-  PlusSquare,
-  FileText,
-  Megaphone,
-  BarChart2,
-  X,
-} from "lucide-react";
 
 const VendorLayout = () => {
-  const [mobileOpen, setMobileOpen] = useState(false);
-
-  const toggleMobileSidebar = () => setMobileOpen(!mobileOpen);
-
   return (
-    <div className="flex min-h-screen bg-gradient-to-r from-green-50 via-yellow-50 to-green-100">
-      {/* Mobile top bar */}
-      <div className="md:hidden fixed top-0 left-0 right-0 bg-green-600 text-white flex items-center justify-between px-4 py-3 shadow z-30">
-        <div className="text-xl font-bold flex items-center gap-2">
-          <Menu /> Vendor Panel
+    <div className="drawer lg:drawer-open min-h-screen">
+      {/* Drawer Toggle for mobile */}
+      <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
+
+      {/* Main Content */}
+      <div className="drawer-content flex flex-col">
+        {/* Top Navbar for mobile only */}
+        <div className="navbar bg-base-300 w-full lg:hidden">
+          <div className="flex-none">
+            <label
+              htmlFor="my-drawer-2"
+              aria-label="open sidebar"
+              className="btn btn-square btn-ghost"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                className="inline-block h-6 w-6 stroke-current"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  d="M4 6h16M4 12h16M4 18h16"
+                ></path>
+              </svg>
+            </label>
+          </div>
+          <div className="mx-2 font-bold text-green-600 text-2xl flex-1 px-2">
+            Vendor Dashboard
+          </div>
         </div>
-        <button onClick={toggleMobileSidebar}>
-          {mobileOpen ? <X size={24} /> : <Menu size={24} />}
-        </button>
+
+        {/* Page Content (always visible) */}
+        <div className="p-4 w-full">
+          <Outlet />
+        </div>
       </div>
 
       {/* Sidebar */}
-      <aside
-        className={`w-64 bg-green-600 text-white p-5 flex-col gap-4 fixed h-full z-20 shadow-lg transform transition-transform duration-300 md:translate-x-0 ${
-          mobileOpen ? "translate-x-0" : "-translate-x-full"
-        } md:flex top-0`}
-      >
-        <h2 className="text-2xl font-bold flex items-center gap-2 mb-4">
-          <Menu /> Vendor Panel
-        </h2>
-        <nav className="flex flex-col space-y-2">
-          <NavLink
-            to="addProduct"
-            className={({ isActive }) =>
-              `flex items-center gap-2 px-3 py-2 rounded hover:bg-green-700 transition ${
-                isActive ? "bg-yellow-400 text-black font-semibold" : ""
-              }`
-            }
-            onClick={() => setMobileOpen(false)}
-          >
-            <PlusSquare size={18} /> Add Product
-          </NavLink>
+      <div className="drawer-side">
+        <label htmlFor="my-drawer-2" className="drawer-overlay"></label>
+        <ul className="menu bg-base-200 text-base-content min-h-full w-80 p-4 space-y-3">
+          <h1 className="text-3xl font-bold text-green-600 mb-4">
+            Vendor Dashboard
+          </h1>
 
-          <NavLink
-            to="my-products"
-            className={({ isActive }) =>
-              `flex items-center gap-2 px-3 py-2 rounded hover:bg-green-700 transition ${
-                isActive ? "bg-yellow-400 text-black font-semibold" : ""
-              }`
-            }
-            onClick={() => setMobileOpen(false)}
-          >
-            <FileText size={18} /> My Products
-          </NavLink>
-
-          <NavLink
-            to="add-advertisement"
-            className={({ isActive }) =>
-              `flex items-center gap-2 px-3 py-2 rounded hover:bg-green-700 transition ${
-                isActive ? "bg-yellow-400 text-black font-semibold" : ""
-              }`
-            }
-            onClick={() => setMobileOpen(false)}
-          >
-            <Megaphone size={18} /> Add Advertisement
-          </NavLink>
-
-          <NavLink
-            to="my-advertisements"
-            className={({ isActive }) =>
-              `flex items-center gap-2 px-3 py-2 rounded hover:bg-green-700 transition ${
-                isActive ? "bg-yellow-400 text-black font-semibold" : ""
-              }`
-            }
-            onClick={() => setMobileOpen(false)}
-          >
-            <BarChart2 size={18} /> My Advertisements
-          </NavLink>
-        </nav>
-      </aside>
-
-      {/* Main content */}
-      <main className="flex-1 md:ml-64 p-6 pt-16 md:pt-6 w-full">
-        <Outlet />
-      </main>
+          <li>
+            <NavLink
+              to="/"
+              className={({ isActive }) =>
+                isActive
+                  ? "text-xl font-semibold bg-green-100 text-red-700 rounded"
+                  : "text-xl font-semibold"
+              }
+            >
+              Home
+            </NavLink>
+          </li>
+          <li>
+            <NavLink
+              to="/vendorDashboard/addProduct"
+              className={({ isActive }) =>
+                isActive
+                  ? "text-xl font-semibold bg-green-100 text-red-700 rounded"
+                  : "text-xl font-semibold"
+              }
+            >
+              Add Product
+            </NavLink>
+          </li>
+          <li>
+            <NavLink
+              to="/vendorDashboard/myProducts"
+              className={({ isActive }) =>
+                isActive
+                  ? "text-xl font-semibold bg-green-100 text-red-700 rounded"
+                  : "text-xl font-semibold"
+              }
+            >
+              My Products
+            </NavLink>
+          </li>
+          <li>
+            <NavLink
+              to="/vendorDashboard/addAdvertisement"
+              className={({ isActive }) =>
+                isActive
+                  ? "text-xl font-semibold bg-green-100 text-red-700 rounded"
+                  : "text-xl font-semibold"
+              }
+            >
+              Add Advertisement
+            </NavLink>
+          </li>
+          <li>
+            <NavLink
+              to="/vendorDashboard/myAdvertisements"
+              className={({ isActive }) =>
+                isActive
+                  ? "text-xl font-semibold bg-green-100 text-red-700 rounded"
+                  : "text-xl font-semibold"
+              }
+            >
+              My Advertisements
+            </NavLink>
+          </li>
+        </ul>
+      </div>
     </div>
   );
 };
