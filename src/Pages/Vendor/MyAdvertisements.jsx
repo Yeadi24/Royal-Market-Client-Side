@@ -6,6 +6,7 @@ import { useNavigate } from "react-router";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Loading from "../Shared/Loading";
+import Swal from "sweetalert2";
 
 const MyAdvertisements = () => {
   const navigate = useNavigate();
@@ -29,21 +30,41 @@ const MyAdvertisements = () => {
   }, [user]);
 
   const handleDelete = (id) => {
-    if (
-      !window.confirm("Are you sure you want to delete this advertisement?")
-    ) {
-      return;
-    }
-
-    axios
-      .delete(`http://localhost:3000/ads/${id}`)
-      .then((res) => {
-        if (res.data.deletedCount > 0) {
-          setAds(ads.filter((ad) => ad._id !== id));
-          toast.success("Advertisement deleted successfully");
-        }
-      })
-      .catch(() => toast.error("Failed to delete ad"));
+    Swal.fire({
+      title: "Are you sure?",
+      text: "This advertisement will be permanently deleted!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#d33",
+      cancelButtonColor: "#3085d6",
+      confirmButtonText: "Yes, delete it!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        fetch(`http://localhost:3000/ads/${id}`, {
+          method: "DELETE",
+        })
+          .then((res) => res.json())
+          .then((data) => {
+            if (data.deletedCount > 0) {
+              setAds((prevAds) => prevAds.filter((ad) => ad._id !== id));
+              Swal.fire(
+                "Deleted!",
+                "The advertisement has been removed.",
+                "success"
+              );
+            } else {
+              Swal.fire(
+                "Error!",
+                "Failed to delete the advertisement.",
+                "error"
+              );
+            }
+          })
+          .catch(() => {
+            Swal.fire("Error!", "Something went wrong. Try again.", "error");
+          });
+      }
+    });
   };
 
   return (
