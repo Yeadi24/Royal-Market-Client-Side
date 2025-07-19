@@ -5,12 +5,12 @@ import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 const AddAdvertisement = () => {
-  const { user } = useContext(AuthContext);
+  const user = useContext(AuthContext);
 
   const [imagePreview, setImagePreview] = useState(null);
   const [formData, setFormData] = useState({
-    email: user?.email || "",
-    vendorName: user?.displayName || "",
+    email: user?.user?.email || "",
+    vendorName: user?.user?.displayName || "",
     adTitle: "",
     shortDescription: "",
     imageUrl: "",

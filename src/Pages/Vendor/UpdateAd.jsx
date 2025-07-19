@@ -13,11 +13,13 @@ const UpdateAd = () => {
     shortDescription: "",
     imageUrl: "",
     status: "pending",
+    email: "",
+    vendorName: "",
   });
 
   const [imagePreview, setImagePreview] = useState(null);
 
-  // Fetch the ad by ID
+  // Fetch the ad data
   useEffect(() => {
     axios
       .get(`http://localhost:3000/ads/${id}`)
@@ -30,6 +32,7 @@ const UpdateAd = () => {
         toast.error("Failed to load ad data");
       });
   }, [id]);
+  console.log(formData);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -63,7 +66,13 @@ const UpdateAd = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (!formData.adTitle || !formData.shortDescription || !formData.imageUrl) {
+    if (
+      !formData.adTitle ||
+      !formData.shortDescription ||
+      !formData.imageUrl ||
+      !formData.vendorName ||
+      !formData.email
+    ) {
       toast.error("Please fill all required fields");
       return;
     }
@@ -71,7 +80,7 @@ const UpdateAd = () => {
     try {
       await axios.put(`http://localhost:3000/ads/${id}`, formData);
       toast.success("Advertisement updated successfully");
-      navigate("/vendorDashboard/myAds");
+      navigate("/vendorDashboard/myAdvertisements");
     } catch (err) {
       console.error(err);
       toast.error("Failed to update advertisement");
@@ -85,6 +94,38 @@ const UpdateAd = () => {
       </h1>
 
       <form onSubmit={handleSubmit} className="space-y-6">
+        {/* Email */}
+        <div>
+          <label className="block text-green-700 font-semibold mb-1">
+            Vendor Email
+          </label>
+          <input
+            type="email"
+            name="email"
+            value={formData.email}
+            onChange={handleChange}
+            className="w-full p-3 border rounded focus:outline-green-500"
+            required
+            disabled
+          />
+        </div>
+
+        {/* Vendor Name */}
+        <div>
+          <label className="block text-green-700 font-semibold mb-1">
+            Vendor Name
+          </label>
+          <input
+            type="text"
+            name="vendorName"
+            value={formData.vendorName}
+            onChange={handleChange}
+            className="w-full p-3 border rounded focus:outline-green-500"
+            required
+          />
+        </div>
+
+        {/* Ad Title */}
         <div>
           <label className="block text-green-700 font-semibold mb-1">
             Ad Title
@@ -99,6 +140,7 @@ const UpdateAd = () => {
           />
         </div>
 
+        {/* Description */}
         <div>
           <label className="block text-green-700 font-semibold mb-1">
             Short Description
@@ -113,6 +155,7 @@ const UpdateAd = () => {
           ></textarea>
         </div>
 
+        {/* Image Upload */}
         <div>
           <label className="block text-green-700 font-semibold mb-1">
             Upload Ad Image
@@ -125,6 +168,7 @@ const UpdateAd = () => {
           />
         </div>
 
+        {/* Image Preview */}
         {imagePreview && (
           <div>
             <label className="block text-green-700 font-semibold mb-1">
@@ -138,6 +182,24 @@ const UpdateAd = () => {
           </div>
         )}
 
+        {/* Status */}
+        <div>
+          <label className="block text-green-700 font-semibold mb-1">
+            Status
+          </label>
+          <select
+            name="status"
+            value={formData.status}
+            onChange={handleChange}
+            className="w-full p-3 border rounded focus:outline-green-500"
+          >
+            <option value="pending">Pending</option>
+            {/* <option value="approved">Approved</option>
+            <option value="rejected">Rejected</option> */}
+          </select>
+        </div>
+
+        {/* Submit Button */}
         <button
           type="submit"
           className="w-full bg-gradient-to-r from-green-500 to-green-700 text-white font-bold p-3 rounded shadow-lg hover:scale-105 transition-transform"
