@@ -42,7 +42,6 @@ const UpdateProduct = () => {
         setMarketDate(new Date(data.date));
         setImagePreview(data.imageUrl);
         setExistingPriceHistory(data.priceHistory || []);
-        navigate("/vendorDashboard/myProducts");
       })
       .catch((error) => {
         console.error("Error loading product:", error);
@@ -128,6 +127,7 @@ const UpdateProduct = () => {
       setImagePreview(null);
       setMarketDate(new Date());
       setExistingPriceHistory([]);
+      navigate("/dashboard/myProducts");
     } catch (error) {
       console.error("Update error:", error);
       toast.error("Failed to update product");
@@ -156,6 +156,7 @@ const UpdateProduct = () => {
             type="text"
             className="w-full p-3 border rounded"
             required
+            readOnly
           />
         </div>
 
@@ -170,6 +171,7 @@ const UpdateProduct = () => {
             type="email"
             className="w-full p-3 border rounded"
             required
+            readOnly
           />
         </div>
 

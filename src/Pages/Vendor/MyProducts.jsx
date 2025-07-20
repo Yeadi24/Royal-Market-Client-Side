@@ -10,6 +10,7 @@ const MyProducts = () => {
   const navigate = useNavigate();
   const user = use(AuthContext);
   const [products, setProducts] = useState([]);
+  console.log(products);
 
   useEffect(() => {
     if (user?.user?.email) {
@@ -47,7 +48,7 @@ const MyProducts = () => {
   return (
     <>
       {products.length === 0 ? (
-        <Loading></Loading>
+        <p className="text-2xl text-red-700">No Product To Show</p>
       ) : (
         <div className="p-4 min-h-screen bg-green-50">
           <h2 className="text-3xl font-bold text-green-700 mb-4 text-center">
@@ -86,9 +87,7 @@ const MyProducts = () => {
                         <button
                           className="text-blue-600 hover:text-blue-800"
                           onClick={() =>
-                            navigate(
-                              `/vendorDashboard/updateProduct/${product._id}`
-                            )
+                            navigate(`/dashboard/updateProduct/${product._id}`)
                           }
                         >
                           <FaEdit size={18} />

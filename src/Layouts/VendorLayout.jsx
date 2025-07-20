@@ -1,4 +1,3 @@
-import React from "react";
 import { NavLink, Outlet } from "react-router";
 
 const VendorLayout = () => {
@@ -63,7 +62,7 @@ const VendorLayout = () => {
           </li>
           <li>
             <NavLink
-              to="/vendorDashboard/addProduct"
+              to="/dashboard/addProduct"
               className={({ isActive }) =>
                 isActive
                   ? "text-xl font-semibold bg-green-100 text-red-700 rounded"
@@ -75,7 +74,7 @@ const VendorLayout = () => {
           </li>
           <li>
             <NavLink
-              to="/vendorDashboard/myProducts"
+              to="/dashboard/myProducts"
               className={({ isActive }) =>
                 isActive
                   ? "text-xl font-semibold bg-green-100 text-red-700 rounded"
@@ -87,7 +86,7 @@ const VendorLayout = () => {
           </li>
           <li>
             <NavLink
-              to="/vendorDashboard/addAdvertisement"
+              to="/dashboard/addAdvertisement"
               className={({ isActive }) =>
                 isActive
                   ? "text-xl font-semibold bg-green-100 text-red-700 rounded"
@@ -99,7 +98,7 @@ const VendorLayout = () => {
           </li>
           <li>
             <NavLink
-              to="/vendorDashboard/myAdvertisements"
+              to="/dashboard/myAdvertisements"
               className={({ isActive }) =>
                 isActive
                   ? "text-xl font-semibold bg-green-100 text-red-700 rounded"
@@ -107,6 +106,30 @@ const VendorLayout = () => {
               }
             >
               My Advertisements
+            </NavLink>
+          </li>
+          <li>
+            <NavLink
+              to="/dashboard/users"
+              className={({ isActive }) =>
+                isActive
+                  ? "text-xl font-semibold bg-green-100 text-red-700 rounded"
+                  : "text-xl font-semibold"
+              }
+            >
+              All Users
+            </NavLink>
+          </li>
+          <li>
+            <NavLink
+              to="/dashboard/products"
+              className={({ isActive }) =>
+                isActive
+                  ? "text-xl font-semibold bg-green-100 text-red-700 rounded"
+                  : "text-xl font-semibold"
+              }
+            >
+              All Products
             </NavLink>
           </li>
         </ul>

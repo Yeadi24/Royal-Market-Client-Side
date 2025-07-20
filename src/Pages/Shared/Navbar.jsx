@@ -49,28 +49,13 @@ const Navbar = () => {
               My Books
             </NavLink>
           </li>
+
           <li>
             <NavLink
-              to="/userDashboard"
+              to="/dashboard/AddProduct"
               className={linkStyle + " text-red-700"}
             >
-              User
-            </NavLink>
-          </li>
-          <li>
-            <NavLink
-              to="/VendorDashboard/AddProduct"
-              className={linkStyle + " text-red-700"}
-            >
-              Vendor
-            </NavLink>
-          </li>
-          <li>
-            <NavLink
-              to="/Admindashboard"
-              className={linkStyle + " text-red-700"}
-            >
-              Admin
+              Dashboard
             </NavLink>
           </li>
         </>

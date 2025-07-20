@@ -7,6 +7,7 @@ import Lottie from "lottie-react";
 import loginAnimation from "../../assets/login.json";
 import { AuthContext } from "../../Contexts/AuthContext";
 import axios from "axios";
+import { toast } from "react-toastify";
 
 const Login = () => {
   document.title = "LogIn";
