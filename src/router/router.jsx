@@ -14,6 +14,7 @@ import MyAdvertisements from "../Pages/Vendor/MyAdvertisements";
 import UpdateAd from "../Pages/Vendor/UpdateAd";
 import AllUsers from "../Pages/Admin/AllUsers";
 import Products from "../Pages/Admin/Products";
+import Ads from "../Pages/Admin/Ads";
 export const router = createBrowserRouter([
   {
     path: "/",
@@ -109,6 +110,14 @@ export const router = createBrowserRouter([
         element: (
           <PrivateRoute>
             <Products></Products>
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "ads",
+        element: (
+          <PrivateRoute>
+            <Ads></Ads>
           </PrivateRoute>
         ),
       },

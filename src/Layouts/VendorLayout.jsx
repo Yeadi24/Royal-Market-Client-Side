@@ -132,6 +132,18 @@ const VendorLayout = () => {
               All Products
             </NavLink>
           </li>
+          <li>
+            <NavLink
+              to="/dashboard/ads"
+              className={({ isActive }) =>
+                isActive
+                  ? "text-xl font-semibold bg-green-100 text-red-700 rounded"
+                  : "text-xl font-semibold"
+              }
+            >
+              All Advertisements
+            </NavLink>
+          </li>
         </ul>
       </div>
     </div>
