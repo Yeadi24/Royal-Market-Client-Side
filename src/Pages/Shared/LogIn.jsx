@@ -6,6 +6,7 @@ import Swal from "sweetalert2";
 import Lottie from "lottie-react";
 import loginAnimation from "../../assets/login.json";
 import { AuthContext } from "../../Contexts/AuthContext";
+import axios from "axios";
 
 const Login = () => {
   document.title = "LogIn";
@@ -29,19 +30,40 @@ const Login = () => {
 
   const handleGoogleSignIn = () => {
     GoogleSignIn()
-      .then(() => {
+      .then((result) => {
+        const user = result.user;
+
+        const newUser = {
+          name: user.displayName,
+          email: user.email,
+          photoURL: "https://i.ibb.co/W4sVBFSb/download-5.jpg",
+          role: "user",
+        };
+
+        // Save to MongoDB
+        axios
+          .post("http://localhost:3000/users", newUser)
+          .then((res) => {
+            console.log("Google user saved to DB:", res.data);
+          })
+          .catch((error) => {
+            console.error("Error saving Google user:", error);
+          });
+
         Swal.fire({
           title: "SignIn Successful !!!",
           icon: "success",
           draggable: true,
         });
+
         navigate("/");
       })
-      .catch(() => {
+      .catch((error) => {
+        console.error("Google Sign-In error:", error);
         Swal.fire({
+          title: "SignIn Failed",
+          text: error.message,
           icon: "error",
-          title: "Oops...",
-          text: "Something went wrong!",
         });
       });
   };

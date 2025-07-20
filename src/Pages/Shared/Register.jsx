@@ -4,6 +4,7 @@ import Swal from "sweetalert2";
 import Lottie from "lottie-react";
 import registerAnimation from "../../assets/signup.json";
 import { AuthContext } from "../../Contexts/AuthContext";
+import axios from "axios";
 
 const Register = () => {
   document.title = "Register";
@@ -14,15 +15,42 @@ const Register = () => {
 
   const handleGoogleSignIn = () => {
     GoogleSignIn()
-      .then(() => {
+      .then((result) => {
+        const user = result.user;
+
+        const newUser = {
+          name: user.displayName,
+          email: user.email,
+          photoURL: "https://i.ibb.co/W4sVBFSb/download-5.jpg",
+          role: "user",
+        };
+
+        // Save to MongoDB
+        axios
+          .post("http://localhost:3000/users", newUser)
+          .then((res) => {
+            console.log("Google user saved to DB:", res.data);
+          })
+          .catch((error) => {
+            console.error("Error saving Google user:", error);
+          });
+
         Swal.fire({
           title: "SignIn Successful !!!",
           icon: "success",
           draggable: true,
         });
+
         navigate("/");
       })
-      .catch(() => {});
+      .catch((error) => {
+        console.error("Google Sign-In error:", error);
+        Swal.fire({
+          title: "SignIn Failed",
+          text: error.message,
+          icon: "error",
+        });
+      });
   };
 
   const handleRegister = async (e) => {
@@ -36,7 +64,7 @@ const Register = () => {
     formData.append("image", photoFile);
 
     try {
-      // Upload to imgbb
+      // Upload image to imgbb
       const res = await fetch(
         `https://api.imgbb.com/1/upload?key=2e79cf578ef259716600ff8aa838ef9a`,
         {
@@ -50,7 +78,8 @@ const Register = () => {
 
       createUser(email, password)
         .then(() => {
-          console.log("created");
+          console.log("User created in Firebase");
+
           update(name, photoURL)
             .then(() => {
               Swal.fire({
@@ -58,17 +87,43 @@ const Register = () => {
                 icon: "success",
                 draggable: true,
               });
+
+              // 👉 Create user object with default role
+              const userInfo = {
+                name,
+                email,
+                photoURL,
+                role: "user", // default role
+              };
+
+              // 👉 Save user in MongoDB via Axios
+              axios
+                .post("http://localhost:3000/users", userInfo)
+                .then((res) => {
+                  console.log("User saved to MongoDB:", res.data);
+                })
+                .catch((err) => {
+                  console.error("Failed to save user to MongoDB:", err);
+                });
+
               navigate("/");
             })
             .catch(() => {
               Swal.fire({
                 title: "Ooopss Signup Unsuccessful !!!",
-                icon: "success",
+                icon: "error",
                 draggable: true,
               });
             });
         })
-        .catch(() => {});
+        .catch((error) => {
+          console.error("Firebase signup failed:", error);
+          Swal.fire({
+            title: "Signup failed",
+            text: error.message,
+            icon: "error",
+          });
+        });
     } catch (err) {
       console.error("Image upload failed", err);
       Swal.fire({

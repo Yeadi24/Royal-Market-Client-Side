@@ -59,7 +59,7 @@ const Navbar = () => {
           </li>
           <li>
             <NavLink
-              to="/VendorDashboard"
+              to="/VendorDashboard/AddProduct"
               className={linkStyle + " text-red-700"}
             >
               Vendor

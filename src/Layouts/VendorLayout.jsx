@@ -33,7 +33,7 @@ const VendorLayout = () => {
             </label>
           </div>
           <div className="mx-2 font-bold text-green-600 text-2xl flex-1 px-2">
-            Vendor Dashboard
+            Dashboard
           </div>
         </div>
 
@@ -47,9 +47,7 @@ const VendorLayout = () => {
       <div className="drawer-side">
         <label htmlFor="my-drawer-2" className="drawer-overlay"></label>
         <ul className="menu bg-base-200 text-base-content min-h-full w-80 p-4 space-y-3">
-          <h1 className="text-3xl font-bold text-green-600 mb-4">
-            Vendor Dashboard
-          </h1>
+          <h1 className="text-3xl font-bold text-green-600 mb-4">Dashboard</h1>
 
           <li>
             <NavLink
