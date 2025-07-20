@@ -48,7 +48,9 @@ const MyProducts = () => {
   return (
     <>
       {products.length === 0 ? (
-        <p className="text-2xl text-red-700">No Product To Show</p>
+        <p className="text-3xl text-red-700 font-bold text-center">
+          No Product To Show
+        </p>
       ) : (
         <div className="p-4 min-h-screen bg-green-50">
           <h2 className="text-3xl font-bold text-green-700 mb-4 text-center">

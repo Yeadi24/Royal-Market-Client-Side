@@ -15,6 +15,9 @@ import UpdateAd from "../Pages/Vendor/UpdateAd";
 import AllUsers from "../Pages/Admin/AllUsers";
 import Products from "../Pages/Admin/Products";
 import Ads from "../Pages/Admin/Ads";
+import Orders from "../Pages/Admin/Orders";
+import PriceTrends from "../Pages/User/PriceTrends";
+import TrendGraph from "../Pages/User/TrendGraph";
 export const router = createBrowserRouter([
   {
     path: "/",
@@ -120,6 +123,32 @@ export const router = createBrowserRouter([
             <Ads></Ads>
           </PrivateRoute>
         ),
+      },
+      {
+        path: "orders",
+        element: (
+          <PrivateRoute>
+            <Orders></Orders>
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "priceTrends",
+        element: (
+          <PrivateRoute>
+            <PriceTrends></PriceTrends>
+          </PrivateRoute>
+        ),
+        children: [
+          {
+            path: ":productId",
+            element: (
+              <PrivateRoute>
+                <TrendGraph></TrendGraph>
+              </PrivateRoute>
+            ),
+          },
+        ],
       },
     ],
   },

@@ -42,7 +42,7 @@ const Products = () => {
       confirmButtonText: "Yes, delete it!",
     }).then((result) => {
       if (result.isConfirmed) {
-        fetch(`http://localhost:3000/products/${deleteProductId}`, {
+        fetch(`http://localhost:3000/products/${id}`, {
           method: "DELETE",
         })
           .then((res) => res.json())
@@ -54,10 +54,6 @@ const Products = () => {
           });
       }
     });
-  };
-
-  const handleUpdate = (id) => {
-    navigate(`/update-product/${id}`);
   };
 
   return (
