@@ -88,7 +88,7 @@ const Register = () => {
                 draggable: true,
               });
 
-              // 👉 Create user object with default role
+              //  Create user object with default role
               const userInfo = {
                 name,
                 email,
@@ -96,7 +96,7 @@ const Register = () => {
                 role: "user", // default role
               };
 
-              // 👉 Save user in MongoDB via Axios
+              //  Save user in MongoDB via Axios
               axios
                 .post("http://localhost:3000/users", userInfo)
                 .then((res) => {

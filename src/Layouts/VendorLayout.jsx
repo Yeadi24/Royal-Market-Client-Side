@@ -1,6 +1,11 @@
 import { NavLink, Outlet } from "react-router";
+import useGetRole from "../Hooks/useGetRole";
+import { use } from "react";
+import { AuthContext } from "../Contexts/AuthContext";
 
 const VendorLayout = () => {
+  const user = use(AuthContext);
+  const { role, loading, error } = useGetRole(user?.user?.email);
   return (
     <div className="drawer lg:drawer-open min-h-screen">
       {/* Drawer Toggle for mobile */}
@@ -108,54 +113,58 @@ const VendorLayout = () => {
               My Advertisements
             </NavLink>
           </li>
-          <li>
-            <NavLink
-              to="/dashboard/users"
-              className={({ isActive }) =>
-                isActive
-                  ? "text-xl font-semibold bg-green-100 text-red-700 rounded"
-                  : "text-xl font-semibold"
-              }
-            >
-              All Users
-            </NavLink>
-          </li>
-          <li>
-            <NavLink
-              to="/dashboard/products"
-              className={({ isActive }) =>
-                isActive
-                  ? "text-xl font-semibold bg-green-100 text-red-700 rounded"
-                  : "text-xl font-semibold"
-              }
-            >
-              All Products
-            </NavLink>
-          </li>
-          <li>
-            <NavLink
-              to="/dashboard/ads"
-              className={({ isActive }) =>
-                isActive
-                  ? "text-xl font-semibold bg-green-100 text-red-700 rounded"
-                  : "text-xl font-semibold"
-              }
-            >
-              All Advertisements
-            </NavLink>
-          </li>
-          <li>
-            <NavLink
-              to="/dashboard/orders"
-              className={({ isActive }) =>
-                isActive
-                  ? "text-xl font-semibold bg-green-100 text-red-700 rounded"
-                  : "text-xl font-semibold"
-              }
-            >
-              All Orders
-            </NavLink>
-          </li>
+          {role === "admin" && !loading && (
+            <>
+              <li>
+                <NavLink
+                  to="/dashboard/users"
+                  className={({ isActive }) =>
+                    isActive
+                      ? "text-xl font-semibold bg-green-100 text-red-700 rounded"
+                      : "text-xl font-semibold"
+                  }
+                >
+                  All Users
+                </NavLink>
+              </li>
+              <li>
+                <NavLink
+                  to="/dashboard/products"
+                  className={({ isActive }) =>
+                    isActive
+                      ? "text-xl font-semibold bg-green-100 text-red-700 rounded"
+                      : "text-xl font-semibold"
+                  }
+                >
+                  All Products
+                </NavLink>
+              </li>
+              <li>
+                <NavLink
+                  to="/dashboard/ads"
+                  className={({ isActive }) =>
+                    isActive
+                      ? "text-xl font-semibold bg-green-100 text-red-700 rounded"
+                      : "text-xl font-semibold"
+                  }
+                >
+                  All Advertisements
+                </NavLink>
+              </li>
+              <li>
+                <NavLink
+                  to="/dashboard/orders"
+                  className={({ isActive }) =>
+                    isActive
+                      ? "text-xl font-semibold bg-green-100 text-red-700 rounded"
+                      : "text-xl font-semibold"
+                  }
+                >
+                  All Orders
+                </NavLink>
+              </li>
+            </>
+          )}
           <li>
             <NavLink
               to="/dashboard/priceTrends"

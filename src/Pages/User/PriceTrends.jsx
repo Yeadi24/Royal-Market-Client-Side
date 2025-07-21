@@ -18,18 +18,25 @@ const PriceTrends = () => {
       {/* Sidebar */}
       <div className="w-64 bg-white shadow-md p-4">
         <h2 className="text-lg font-semibold mb-4 text-green-700">
-          Approved Products
+          Tracked Products
         </h2>
         <ul className="space-y-2">
           {products.map((product) => (
             <li key={product._id}>
               <Link
                 to={`/dashboard/priceTrends/${product._id}`}
-                className={`block px-4 py-2 rounded hover:bg-green-100 ${
-                  location.pathname.includes(product._id) ? "bg-green-200" : ""
+                className={`block px-4 py-2 text-black rounded hover:bg-green-100 ${
+                  location.pathname.includes(product._id) ? "bg-green-400" : ""
                 }`}
               >
-                {product.name}
+                <div className="flex justify-center items-center gap-10">
+                  <img
+                    src={product.imageUrl}
+                    alt={product.itemName}
+                    className="w-20 h-16 object-cover rounded mb-2"
+                  />
+                  <p className="font-bold">{product.itemName}</p>
+                </div>
               </Link>
             </li>
           ))}
