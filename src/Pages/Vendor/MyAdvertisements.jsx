@@ -70,7 +70,9 @@ const MyAdvertisements = () => {
   return (
     <>
       {ads.length === 0 ? (
-        <p className="text-2xl text-red-700">No Ads To Show</p>
+        <p className="text-2xl text-red-700 text-center font-bold">
+          No Ads To Show
+        </p>
       ) : (
         <div className="p-4 min-h-screen bg-green-50">
           <h2 className="text-3xl font-bold text-green-700 mb-4 text-center">

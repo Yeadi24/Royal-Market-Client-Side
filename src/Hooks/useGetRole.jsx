@@ -3,16 +3,17 @@ import axios from "axios";
 
 const useGetRole = (email) => {
   const [role, setRole] = useState(null);
-  const [loading, setLoading] = useState(true); // optional
-  const [error, setError] = useState(null); // optional
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
     if (!email) return;
-
     setLoading(true);
     axios
       .get(`http://localhost:3000/users/role/${email}`)
       .then((res) => {
+        console.log(res);
+
         setRole(res.data.role);
         setError(null);
       })
@@ -25,7 +26,6 @@ const useGetRole = (email) => {
         setLoading(false);
       });
   }, [email]);
-
   return { role, loading, error };
 };
 

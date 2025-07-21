@@ -4,7 +4,6 @@ import RootLayout from "../Layouts/RootLayout";
 import AuthLayout from "../Layouts/AuthLayout";
 import LogIn from "../Pages/Shared/LogIn";
 import Register from "../Pages/Shared/Register";
-import VendorLayout from "../Layouts/VendorLayout";
 import AddProduct from "../Pages/Vendor/AddProduct";
 import PrivateRoute from "./PrivateRoute";
 import MyProducts from "../Pages/Vendor/MyProducts";
@@ -18,6 +17,10 @@ import Ads from "../Pages/Admin/Ads";
 import Orders from "../Pages/Admin/Orders";
 import PriceTrends from "../Pages/User/PriceTrends";
 import TrendGraph from "../Pages/User/TrendGraph";
+import Forbidden from "../Pages/Shared/Forbidden";
+import AdminRoute from "./AdminRoute";
+import VendorRoute from "./VendorRoute";
+import DashboardLayout from "../Layouts/DashboardLayout";
 export const router = createBrowserRouter([
   {
     path: "/",
@@ -41,6 +44,10 @@ export const router = createBrowserRouter([
           },
         ],
       },
+      {
+        path: "forbidden",
+        Component: Forbidden,
+      },
     ],
   },
 
@@ -48,24 +55,24 @@ export const router = createBrowserRouter([
     path: "/dashboard",
     element: (
       <PrivateRoute>
-        <VendorLayout />
+        <DashboardLayout></DashboardLayout>
       </PrivateRoute>
     ),
     children: [
       {
         path: "addProduct",
         element: (
-          <PrivateRoute>
+          <VendorRoute>
             <AddProduct></AddProduct>
-          </PrivateRoute>
+          </VendorRoute>
         ),
       },
       {
         path: "myProducts",
         element: (
-          <PrivateRoute>
+          <VendorRoute>
             <MyProducts></MyProducts>
-          </PrivateRoute>
+          </VendorRoute>
         ),
       },
       {
@@ -79,17 +86,17 @@ export const router = createBrowserRouter([
       {
         path: "addAdvertisement",
         element: (
-          <PrivateRoute>
+          <VendorRoute>
             <AddAdvertisement></AddAdvertisement>
-          </PrivateRoute>
+          </VendorRoute>
         ),
       },
       {
         path: "myAdvertisements",
         element: (
-          <PrivateRoute>
+          <VendorRoute>
             <MyAdvertisements></MyAdvertisements>
-          </PrivateRoute>
+          </VendorRoute>
         ),
       },
       {
@@ -103,33 +110,33 @@ export const router = createBrowserRouter([
       {
         path: "users",
         element: (
-          <PrivateRoute>
+          <AdminRoute>
             <AllUsers></AllUsers>
-          </PrivateRoute>
+          </AdminRoute>
         ),
       },
       {
         path: "products",
         element: (
-          <PrivateRoute>
+          <AdminRoute>
             <Products></Products>
-          </PrivateRoute>
+          </AdminRoute>
         ),
       },
       {
         path: "ads",
         element: (
-          <PrivateRoute>
+          <AdminRoute>
             <Ads></Ads>
-          </PrivateRoute>
+          </AdminRoute>
         ),
       },
       {
         path: "orders",
         element: (
-          <PrivateRoute>
+          <AdminRoute>
             <Orders></Orders>
-          </PrivateRoute>
+          </AdminRoute>
         ),
       },
       {

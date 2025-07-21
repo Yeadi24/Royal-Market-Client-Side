@@ -4,6 +4,7 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { AuthContext } from "../../Contexts/AuthContext";
 import Swal from "sweetalert2";
+import { toast } from "react-toastify";
 
 const AddProduct = () => {
   const user = use(AuthContext);
@@ -73,13 +74,14 @@ const AddProduct = () => {
         "http://localhost:3000/products",
         newProduct
       );
-      Swal.fire({
-        position: "top-end",
-        icon: "success",
-        title: "Your Product Has been Saved",
-        showConfirmButton: false,
-        timer: 1500,
-      });
+      toast.success("Product Added");
+      // Swal.fire({
+      //   position: "top-end",
+      //   icon: "success",
+      //   title: "Your Product Has been Saved",
+      //   showConfirmButton: false,
+      //   timer: 1500,
+      // });
       setFormData({
         email: user.user.email,
         vendorName: user.user.displayName,
@@ -97,11 +99,7 @@ const AddProduct = () => {
       setImagePreview(null);
     } catch (error) {
       console.error("Error submitting product:", error);
-      Swal.fire({
-        icon: "error",
-        title: "Oops...",
-        text: "Error adding product!",
-      });
+      toast.error("Error submitting product");
     }
   };
 
@@ -110,6 +108,7 @@ const AddProduct = () => {
       <h1 className="text-4xl font-extrabold text-center mb-6 text-green-600">
         Add New Product
       </h1>
+      <button onClick={() => toast.success("Button clicked")}>click</button>
       <form
         onSubmit={handleSubmit}
         className="grid grid-cols-1 md:grid-cols-2 gap-6"

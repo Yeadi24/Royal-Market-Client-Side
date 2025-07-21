@@ -23,6 +23,7 @@ const Register = () => {
           email: user.email,
           photoURL: "https://i.ibb.co/W4sVBFSb/download-5.jpg",
           role: "user",
+          watchlist: [], // ✅ Added
         };
 
         // Save to MongoDB
@@ -88,12 +89,13 @@ const Register = () => {
                 draggable: true,
               });
 
-              //  Create user object with default role
+              // Inside update() success block of handleRegister
               const userInfo = {
                 name,
                 email,
                 photoURL,
-                role: "user", // default role
+                role: "user",
+                watchlist: [], // ✅ Added
               };
 
               //  Save user in MongoDB via Axios

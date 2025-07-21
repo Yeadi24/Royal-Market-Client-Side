@@ -2,10 +2,12 @@ import { NavLink, Outlet } from "react-router";
 import useGetRole from "../Hooks/useGetRole";
 import { use } from "react";
 import { AuthContext } from "../Contexts/AuthContext";
+import { ToastContainer } from "react-toastify";
 
-const VendorLayout = () => {
+const DashboardLayout = () => {
   const user = use(AuthContext);
-  const { role, loading, error } = useGetRole(user?.user?.email);
+  const { role, loading, error } = useGetRole(user.user.email);
+
   return (
     <div className="drawer lg:drawer-open min-h-screen">
       {/* Drawer Toggle for mobile */}
@@ -44,6 +46,7 @@ const VendorLayout = () => {
         {/* Page Content (always visible) */}
         <div className="p-4 w-full">
           <Outlet />
+          <ToastContainer></ToastContainer>
         </div>
       </div>
 
@@ -65,54 +68,58 @@ const VendorLayout = () => {
               Home
             </NavLink>
           </li>
-          <li>
-            <NavLink
-              to="/dashboard/addProduct"
-              className={({ isActive }) =>
-                isActive
-                  ? "text-xl font-semibold bg-green-100 text-red-700 rounded"
-                  : "text-xl font-semibold"
-              }
-            >
-              Add Product
-            </NavLink>
-          </li>
-          <li>
-            <NavLink
-              to="/dashboard/myProducts"
-              className={({ isActive }) =>
-                isActive
-                  ? "text-xl font-semibold bg-green-100 text-red-700 rounded"
-                  : "text-xl font-semibold"
-              }
-            >
-              My Products
-            </NavLink>
-          </li>
-          <li>
-            <NavLink
-              to="/dashboard/addAdvertisement"
-              className={({ isActive }) =>
-                isActive
-                  ? "text-xl font-semibold bg-green-100 text-red-700 rounded"
-                  : "text-xl font-semibold"
-              }
-            >
-              Add Advertisement
-            </NavLink>
-          </li>
-          <li>
-            <NavLink
-              to="/dashboard/myAdvertisements"
-              className={({ isActive }) =>
-                isActive
-                  ? "text-xl font-semibold bg-green-100 text-red-700 rounded"
-                  : "text-xl font-semibold"
-              }
-            >
-              My Advertisements
-            </NavLink>
-          </li>
+          {!loading && role === "vendor" && (
+            <>
+              <li>
+                <NavLink
+                  to="/dashboard/addProduct"
+                  className={({ isActive }) =>
+                    isActive
+                      ? "text-xl font-semibold bg-green-100 text-red-700 rounded"
+                      : "text-xl font-semibold"
+                  }
+                >
+                  Add Product
+                </NavLink>
+              </li>
+              <li>
+                <NavLink
+                  to="/dashboard/myProducts"
+                  className={({ isActive }) =>
+                    isActive
+                      ? "text-xl font-semibold bg-green-100 text-red-700 rounded"
+                      : "text-xl font-semibold"
+                  }
+                >
+                  My Products
+                </NavLink>
+              </li>
+              <li>
+                <NavLink
+                  to="/dashboard/addAdvertisement"
+                  className={({ isActive }) =>
+                    isActive
+                      ? "text-xl font-semibold bg-green-100 text-red-700 rounded"
+                      : "text-xl font-semibold"
+                  }
+                >
+                  Add Advertisement
+                </NavLink>
+              </li>
+              <li>
+                <NavLink
+                  to="/dashboard/myAdvertisements"
+                  className={({ isActive }) =>
+                    isActive
+                      ? "text-xl font-semibold bg-green-100 text-red-700 rounded"
+                      : "text-xl font-semibold"
+                  }
+                >
+                  My Advertisements
+                </NavLink>
+              </li>
+            </>
+          )}
           {role === "admin" && !loading && (
             <>
               <li>
@@ -183,4 +190,4 @@ const VendorLayout = () => {
   );
 };
 
-export default VendorLayout;
+export default DashboardLayout;

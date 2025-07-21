@@ -41,7 +41,6 @@ const AddAdvertisement = () => {
       const data = await res.json();
       if (data.success) {
         setFormData((prev) => ({ ...prev, imageUrl: data.data.url }));
-        toast.success("Image uploaded successfully");
       } else {
         toast.error("Image upload failed");
       }
@@ -61,7 +60,7 @@ const AddAdvertisement = () => {
 
     try {
       await axios.post("http://localhost:3000/ads", formData);
-      toast.success("Ad Added");
+      toast.success("Advertisement Added");
       // Add short delay before clearing
       setTimeout(() => {
         setFormData({

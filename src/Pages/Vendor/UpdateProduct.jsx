@@ -109,7 +109,6 @@ const UpdateProduct = () => {
 
     try {
       await axios.put(`http://localhost:3000/products/${id}`, updatedProduct);
-      toast.success("Product updated successfully!");
 
       // Clear form
       setFormData({
@@ -127,7 +126,11 @@ const UpdateProduct = () => {
       setImagePreview(null);
       setMarketDate(new Date());
       setExistingPriceHistory([]);
-      navigate("/dashboard/myProducts");
+
+      toast.success("Product updated successfully!");
+      setTimeout(() => {
+        navigate("/dashboard/myProducts");
+      }, 3000);
     } catch (error) {
       console.error("Update error:", error);
       toast.error("Failed to update product");

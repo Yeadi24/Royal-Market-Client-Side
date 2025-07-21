@@ -51,10 +51,7 @@ const Navbar = () => {
           </li>
 
           <li>
-            <NavLink
-              to="/dashboard/AddProduct"
-              className={linkStyle + " text-red-700"}
-            >
+            <NavLink to="/dashboard" className={linkStyle + " text-red-700"}>
               Dashboard
             </NavLink>
           </li>
