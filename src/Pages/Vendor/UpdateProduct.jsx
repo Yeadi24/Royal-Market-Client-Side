@@ -8,6 +8,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { AuthContext } from "../../Contexts/AuthContext";
 
 const UpdateProduct = () => {
+  document.title = "Update Product";
   const { id } = useParams();
   const user = useContext(AuthContext);
   const navigate = useNavigate();

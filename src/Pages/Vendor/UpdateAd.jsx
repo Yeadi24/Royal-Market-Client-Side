@@ -7,7 +7,7 @@ import "react-toastify/dist/ReactToastify.css";
 const UpdateAd = () => {
   const { id } = useParams();
   const navigate = useNavigate();
-
+  document.title = "Update Ad";
   const [formData, setFormData] = useState({
     adTitle: "",
     shortDescription: "",

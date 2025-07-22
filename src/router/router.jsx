@@ -21,6 +21,8 @@ import Forbidden from "../Pages/Shared/Forbidden";
 import AdminRoute from "./AdminRoute";
 import VendorRoute from "./VendorRoute";
 import DashboardLayout from "../Layouts/DashboardLayout";
+import UserRoute from "./UserRoute";
+import Details from "../Pages/Home/Details";
 export const router = createBrowserRouter([
   {
     path: "/",
@@ -47,6 +49,14 @@ export const router = createBrowserRouter([
       {
         path: "forbidden",
         Component: Forbidden,
+      },
+      {
+        path: "details/:id",
+        element: (
+          <PrivateRoute>
+            <Details></Details>
+          </PrivateRoute>
+        ),
       },
     ],
   },
@@ -142,17 +152,17 @@ export const router = createBrowserRouter([
       {
         path: "priceTrends",
         element: (
-          <PrivateRoute>
+          <UserRoute>
             <PriceTrends></PriceTrends>
-          </PrivateRoute>
+          </UserRoute>
         ),
         children: [
           {
             path: ":productId",
             element: (
-              <PrivateRoute>
+              <UserRoute>
                 <TrendGraph></TrendGraph>
-              </PrivateRoute>
+              </UserRoute>
             ),
           },
         ],

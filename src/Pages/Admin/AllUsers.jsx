@@ -7,6 +7,7 @@ import "react-toastify/dist/ReactToastify.css";
 Modal.setAppElement("#root");
 
 const AllUsers = () => {
+  document.title = "All Users";
   const [users, setUsers] = useState([]);
   const [selectedUser, setSelectedUser] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);

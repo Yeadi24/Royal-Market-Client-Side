@@ -6,7 +6,7 @@ import "react-toastify/dist/ReactToastify.css";
 
 const AddAdvertisement = () => {
   const user = useContext(AuthContext);
-
+  document.title = "Add Ads";
   const [imagePreview, setImagePreview] = useState(null);
   const [formData, setFormData] = useState({
     email: user?.user?.email || "",
@@ -15,6 +15,7 @@ const AddAdvertisement = () => {
     shortDescription: "",
     imageUrl: "",
     status: "pending",
+    
   });
 
   const handleChange = (e) => {
@@ -70,6 +71,7 @@ const AddAdvertisement = () => {
           shortDescription: "",
           imageUrl: "",
           status: "pending",
+          
         });
         setImagePreview(null);
       }, 100);

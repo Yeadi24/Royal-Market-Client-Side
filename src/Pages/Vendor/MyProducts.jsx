@@ -7,6 +7,8 @@ import { useNavigate } from "react-router";
 import Loading from "../Shared/Loading";
 
 const MyProducts = () => {
+  document.title = "My Products";
+
   const navigate = useNavigate();
   const user = use(AuthContext);
   const [products, setProducts] = useState([]);

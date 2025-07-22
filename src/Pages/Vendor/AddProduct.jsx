@@ -7,6 +7,7 @@ import Swal from "sweetalert2";
 import { toast } from "react-toastify";
 
 const AddProduct = () => {
+  document.title = "Add Product";
   const user = use(AuthContext);
   const [marketDate, setMarketDate] = useState(new Date());
   const [imagePreview, setImagePreview] = useState(null);
@@ -21,6 +22,7 @@ const AddProduct = () => {
     pricePerUnit: "",
     priceHistory: [],
     itemDescription: "",
+    reviews: [],
   });
 
   const handleChange = (e) => {
@@ -94,6 +96,7 @@ const AddProduct = () => {
         pricePerUnit: "",
         priceHistory: [],
         itemDescription: "",
+        reviews: [],
       });
       setMarketDate(new Date());
       setImagePreview(null);

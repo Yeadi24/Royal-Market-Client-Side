@@ -7,7 +7,7 @@ import Swal from "sweetalert2";
 const Ads = () => {
   const [ads, setAds] = useState([]);
   const [loading, setLoading] = useState(true);
-
+  document.title = "All Ads";
   // Fetch ads from backend
   const fetchAds = () => {
     setLoading(true);

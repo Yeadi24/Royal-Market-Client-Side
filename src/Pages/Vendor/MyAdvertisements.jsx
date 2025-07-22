@@ -9,6 +9,7 @@ import Loading from "../Shared/Loading";
 import Swal from "sweetalert2";
 
 const MyAdvertisements = () => {
+  document.title = "My Advertisement";
   const navigate = useNavigate();
   const user = useContext(AuthContext);
   const [ads, setAds] = useState([]);

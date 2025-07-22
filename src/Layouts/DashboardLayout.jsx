@@ -7,7 +7,7 @@ import { ToastContainer } from "react-toastify";
 const DashboardLayout = () => {
   const user = use(AuthContext);
   const { role, loading, error } = useGetRole(user.user.email);
-
+  document.title = "Dashboard";
   return (
     <div className="drawer lg:drawer-open min-h-screen">
       {/* Drawer Toggle for mobile */}
@@ -172,18 +172,20 @@ const DashboardLayout = () => {
               </li>
             </>
           )}
-          <li>
-            <NavLink
-              to="/dashboard/priceTrends"
-              className={({ isActive }) =>
-                isActive
-                  ? "text-xl font-semibold bg-green-100 text-red-700 rounded"
-                  : "text-xl font-semibold"
-              }
-            >
-              Price Trends
-            </NavLink>
-          </li>
+          {!loading && role === "user" && (
+            <li>
+              <NavLink
+                to="/dashboard/priceTrends"
+                className={({ isActive }) =>
+                  isActive
+                    ? "text-xl font-semibold bg-green-100 text-red-700 rounded"
+                    : "text-xl font-semibold"
+                }
+              >
+                Price Trends
+              </NavLink>
+            </li>
+          )}
         </ul>
       </div>
     </div>

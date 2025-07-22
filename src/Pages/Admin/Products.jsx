@@ -6,6 +6,7 @@ import { useNavigate } from "react-router";
 import Swal from "sweetalert2";
 
 const Products = () => {
+  document.title = "All Products";
   const [products, setProducts] = useState([]);
   const [deleteProductId, setDeleteProductId] = useState(null);
   const navigate = useNavigate();
