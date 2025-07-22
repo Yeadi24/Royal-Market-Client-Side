@@ -25,6 +25,7 @@ const Details = () => {
   const [selectedDate, setSelectedDate] = useState("");
   const [reviewText, setReviewText] = useState("");
   const [rating, setRating] = useState(0);
+  console.log(user);
 
   useEffect(() => {
     axios.get(`http://localhost:3000/products/${id}`).then((res) => {

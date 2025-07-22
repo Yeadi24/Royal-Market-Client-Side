@@ -38,18 +38,12 @@ const Navbar = () => {
 
       <li>
         <NavLink to="/bookshelf" className={linkStyle + " text-red-700"}>
-          All
+          All Products
         </NavLink>
       </li>
 
       {user && (
         <>
-          <li>
-            <NavLink to="/myBooks" className={linkStyle + " text-indigo-700"}>
-              My Books
-            </NavLink>
-          </li>
-
           <li>
             <NavLink to="/dashboard" className={linkStyle + " text-red-700"}>
               Dashboard
