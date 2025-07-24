@@ -1,20 +1,24 @@
-import React, { useEffect, useState } from "react";
+import React, { use, useEffect, useState } from "react";
 import axios from "axios";
+import { AuthContext } from "../../Contexts/AuthContext";
 
-const Orders = () => {
-  document.title = "All Orders";
+const MyOrders = () => {
+  const { user } = use(AuthContext);
   const [orders, setOrders] = useState([]);
-
+  console.log(user.email);
   useEffect(() => {
-    axios
-      .get("http://localhost:3000/orders")
-      .then((res) => setOrders(res.data))
-      .catch((err) => console.error("Failed to fetch all orders:", err));
-  }, []);
+    if (user && user.email) {
+      axios
+        .get(`http://localhost:3000/orders?email=${user.email}`)
+        .then((res) => setOrders(res.data))
+        .catch((err) => console.error("Failed to fetch orders:", err));
+    }
+  }, [user]);
+  console.log(orders);
 
   return (
-    <div className="p-4 max-w-6xl mx-auto">
-      <h2 className="text-3xl font-bold mb-6 text-green-700">All Orders</h2>
+    <div className="p-4 max-w-5xl mx-auto">
+      <h2 className="text-3xl font-bold mb-6 text-green-700">My Orders</h2>
       <div className="overflow-x-auto rounded-xl shadow-lg bg-gradient-to-br from-green-50 via-white to-green-100 p-4">
         <table className="min-w-full text-sm md:text-base border border-green-200 rounded-lg overflow-hidden">
           <thead>
@@ -29,7 +33,6 @@ const Orders = () => {
                 Payment Status
               </th>
               <th className="py-3 px-4 border border-green-300">Amount ($)</th>
-              <th className="py-3 px-4 border border-green-300">Email</th>
             </tr>
           </thead>
           <tbody>
@@ -53,16 +56,13 @@ const Orders = () => {
                   <td className="py-2 px-4 border border-green-200 text-green-900 font-semibold">
                     ${order.amount.toFixed(2)}
                   </td>
-                  <td className="py-2 px-4 border border-green-200 text-green-700 font-medium">
-                    {order.email}
-                  </td>
                 </tr>
               ))
             ) : (
               <tr>
                 <td
                   className="py-4 px-4 text-center border border-green-200 text-gray-500"
-                  colSpan="5"
+                  colSpan="4"
                 >
                   No orders found.
                 </td>
@@ -75,4 +75,4 @@ const Orders = () => {
   );
 };
 
-export default Orders;
+export default MyOrders;

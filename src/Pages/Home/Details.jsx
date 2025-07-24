@@ -27,8 +27,7 @@ const Details = () => {
   const [selectedDate, setSelectedDate] = useState("");
   const [reviewText, setReviewText] = useState("");
   const [rating, setRating] = useState(0);
-  const role = useGetRole(user.email);
-  console.log(user);
+  const { role, loading, error } = useGetRole(user.email);
 
   useEffect(() => {
     axios.get(`http://localhost:3000/products/${id}`).then((res) => {
@@ -114,8 +113,8 @@ const Details = () => {
               })}
             </ul>
             <div className="flex gap-4 mt-4">
-              {user?.role !== "admin" &&
-                user?.role !== "vendor" &&
+              {role !== "admin" &&
+                role !== "vendor" &&
                 user?.email !== product.email && (
                   <button
                     onClick={handleAddToWatchlist}
@@ -124,12 +123,16 @@ const Details = () => {
                     ⭐ Add to Watchlist
                   </button>
                 )}
-              <button
-                onClick={() => navigate("/buy-demo")}
-                className="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600 transition"
-              >
-                🛒 Buy Product
-              </button>
+              {role !== "admin" &&
+                role !== "vendor" &&
+                user?.email !== product.email && (
+                  <button
+                    onClick={() => navigate(`/payment/${id}`)}
+                    className="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600 transition"
+                  >
+                    🛒 Buy Product
+                  </button>
+                )}
             </div>
           </div>
         </div>
@@ -152,7 +155,7 @@ const Details = () => {
             ))}
           </div>
 
-          {user && (
+          {role === "user" && (
             <div className="mt-6">
               <h3 className="font-bold mb-2">Leave a review:</h3>
 

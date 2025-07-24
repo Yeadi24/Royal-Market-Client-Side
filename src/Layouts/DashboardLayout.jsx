@@ -198,6 +198,18 @@ const DashboardLayout = () => {
                   WatchList
                 </NavLink>
               </li>
+              <li>
+                <NavLink
+                  to="/dashboard/myorders"
+                  className={({ isActive }) =>
+                    isActive
+                      ? "text-xl font-semibold bg-green-100 text-red-700 rounded"
+                      : "text-xl font-semibold"
+                  }
+                >
+                  My Orders
+                </NavLink>
+              </li>
             </>
           )}
         </ul>

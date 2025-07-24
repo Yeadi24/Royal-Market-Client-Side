@@ -25,6 +25,8 @@ import UserRoute from "./UserRoute";
 import Details from "../Pages/Home/Details";
 import Watchlist from "../Pages/User/Watchlist";
 import AllProducts from "../Pages/Home/AllProducts";
+import Payment from "../Pages/Payment/Payment";
+import MyOrders from "../Pages/User/MyOrders";
 export const router = createBrowserRouter([
   {
     path: "/",
@@ -62,10 +64,14 @@ export const router = createBrowserRouter([
       },
       {
         path: "allProducts",
+        element: <AllProducts></AllProducts>,
+      },
+      {
+        path: "payment/:id",
         element: (
-          <PrivateRoute>
-            <AllProducts></AllProducts>
-          </PrivateRoute>
+          <UserRoute>
+            <Payment></Payment>
+          </UserRoute>
         ),
       },
     ],
@@ -182,6 +188,14 @@ export const router = createBrowserRouter([
         element: (
           <UserRoute>
             <Watchlist></Watchlist>
+          </UserRoute>
+        ),
+      },
+      {
+        path: "myorders",
+        element: (
+          <UserRoute>
+            <MyOrders></MyOrders>
           </UserRoute>
         ),
       },
