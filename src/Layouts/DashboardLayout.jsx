@@ -173,18 +173,32 @@ const DashboardLayout = () => {
             </>
           )}
           {!loading && role === "user" && (
-            <li>
-              <NavLink
-                to="/dashboard/priceTrends"
-                className={({ isActive }) =>
-                  isActive
-                    ? "text-xl font-semibold bg-green-100 text-red-700 rounded"
-                    : "text-xl font-semibold"
-                }
-              >
-                Price Trends
-              </NavLink>
-            </li>
+            <>
+              <li>
+                <NavLink
+                  to="/dashboard/priceTrends"
+                  className={({ isActive }) =>
+                    isActive
+                      ? "text-xl font-semibold bg-green-100 text-red-700 rounded"
+                      : "text-xl font-semibold"
+                  }
+                >
+                  Price Trends
+                </NavLink>
+              </li>
+              <li>
+                <NavLink
+                  to="/dashboard/watchlist"
+                  className={({ isActive }) =>
+                    isActive
+                      ? "text-xl font-semibold bg-green-100 text-red-700 rounded"
+                      : "text-xl font-semibold"
+                  }
+                >
+                  WatchList
+                </NavLink>
+              </li>
+            </>
           )}
         </ul>
       </div>

@@ -37,7 +37,7 @@ const Navbar = () => {
       </li>
 
       <li>
-        <NavLink to="/bookshelf" className={linkStyle + " text-red-700"}>
+        <NavLink to="/allProducts" className={linkStyle + " text-red-700"}>
           All Products
         </NavLink>
       </li>

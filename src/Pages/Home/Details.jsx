@@ -16,15 +16,18 @@ import {
 import { AuthContext } from "../../Contexts/AuthContext";
 import { FaStar } from "react-icons/fa";
 import Rating from "react-rating";
+import useGetRole from "../../Hooks/useGetRole";
 
 const Details = () => {
   const { id } = useParams();
+
   const navigate = useNavigate();
   const { user } = useContext(AuthContext);
   const [product, setProduct] = useState(null);
   const [selectedDate, setSelectedDate] = useState("");
   const [reviewText, setReviewText] = useState("");
   const [rating, setRating] = useState(0);
+  const role = useGetRole(user.email);
   console.log(user);
 
   useEffect(() => {
@@ -111,14 +114,16 @@ const Details = () => {
               })}
             </ul>
             <div className="flex gap-4 mt-4">
-              {user?.role !== "admin" && user?.email !== product.email && (
-                <button
-                  onClick={handleAddToWatchlist}
-                  className="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700 transition"
-                >
-                  ⭐ Add to Watchlist
-                </button>
-              )}
+              {user?.role !== "admin" &&
+                user?.role !== "vendor" &&
+                user?.email !== product.email && (
+                  <button
+                    onClick={handleAddToWatchlist}
+                    className="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700 transition"
+                  >
+                    ⭐ Add to Watchlist
+                  </button>
+                )}
               <button
                 onClick={() => navigate("/buy-demo")}
                 className="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600 transition"

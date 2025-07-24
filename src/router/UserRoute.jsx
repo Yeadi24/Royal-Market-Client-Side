@@ -8,8 +8,6 @@ const UserRoute = ({ children }) => {
   const { user, loading } = use(AuthContext);
   const { role, loading: roleLoading } = useGetRole(user?.email);
 
-  console.log(user, role);
-
   if (loading || roleLoading) {
     return <Loading />;
   }

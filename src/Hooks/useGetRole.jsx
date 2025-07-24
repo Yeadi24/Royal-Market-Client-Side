@@ -12,8 +12,6 @@ const useGetRole = (email) => {
     axios
       .get(`http://localhost:3000/users/role/${email}`)
       .then((res) => {
-        console.log(res);
-
         setRole(res.data.role);
         setError(null);
       })

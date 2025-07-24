@@ -23,6 +23,8 @@ import VendorRoute from "./VendorRoute";
 import DashboardLayout from "../Layouts/DashboardLayout";
 import UserRoute from "./UserRoute";
 import Details from "../Pages/Home/Details";
+import Watchlist from "../Pages/User/Watchlist";
+import AllProducts from "../Pages/Home/AllProducts";
 export const router = createBrowserRouter([
   {
     path: "/",
@@ -55,6 +57,14 @@ export const router = createBrowserRouter([
         element: (
           <PrivateRoute>
             <Details></Details>
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "allProducts",
+        element: (
+          <PrivateRoute>
+            <AllProducts></AllProducts>
           </PrivateRoute>
         ),
       },
@@ -166,6 +176,14 @@ export const router = createBrowserRouter([
             ),
           },
         ],
+      },
+      {
+        path: "watchlist",
+        element: (
+          <UserRoute>
+            <Watchlist></Watchlist>
+          </UserRoute>
+        ),
       },
     ],
   },
