@@ -5,43 +5,45 @@ import { useNavigate } from "react-router";
 import { AuthContext } from "../../Contexts/AuthContext";
 
 const AllProducts = () => {
+  document.title = "All Products";
   const [products, setProducts] = useState([]);
-  const [sortOrder, setSortOrder] = useState(""); // "asc" or "desc"
-  const [startDate, setStartDate] = useState("");
-  const [endDate, setEndDate] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
-
+  const [sortOrder, setSortOrder] = useState("");
   const navigate = useNavigate();
   const user = use(AuthContext);
 
   const fetchProducts = () => {
     const params = {};
-    if (sortOrder) params.sort = sortOrder;
-    if (startDate) params.start = startDate;
-    if (endDate) params.end = endDate;
 
     axios
       .get("http://localhost:3000/products", { params })
       .then((res) => {
         setProducts(res.data);
-        setCurrentPage(1); // Reset to first page on filter/sort
+        setCurrentPage(1); // Reset to first page on fetch
       })
       .catch((err) => console.error("Error fetching products:", err));
   };
 
   useEffect(() => {
     fetchProducts();
-  }, [sortOrder, startDate, endDate]);
+  }, []);
 
   const handleViewDetails = (id) => {
     if (!user) return navigate("/login");
     navigate(`/details/${id}`);
   };
 
+  // Sorting logic
+  const sortedProducts = [...products].sort((a, b) => {
+    if (sortOrder === "asc") return a.pricePerUnit - b.pricePerUnit;
+    if (sortOrder === "desc") return b.pricePerUnit - a.pricePerUnit;
+    return 0;
+  });
+
   // Pagination logic
   const itemsPerPage = 6;
-  const totalPages = Math.ceil(products.length / itemsPerPage);
-  const paginatedProducts = products.slice(
+  const totalPages = Math.ceil(sortedProducts.length / itemsPerPage);
+  const paginatedProducts = sortedProducts.slice(
     (currentPage - 1) * itemsPerPage,
     currentPage * itemsPerPage
   );
@@ -52,36 +54,16 @@ const AllProducts = () => {
         🛍️ All Products
       </h1>
 
-      {/* 🔽 Filter and Sort Controls */}
-      <div className="flex flex-wrap items-center gap-4 mb-8 justify-center">
-        <label className="flex flex-col text-sm">
-          📅 Start Date
-          <input
-            type="date"
-            value={startDate}
-            onChange={(e) => setStartDate(e.target.value)}
-            className="border rounded px-2 py-1"
-          />
-        </label>
-
-        <label className="flex flex-col text-sm">
-          📅 End Date
-          <input
-            type="date"
-            value={endDate}
-            onChange={(e) => setEndDate(e.target.value)}
-            className="border rounded px-2 py-1"
-          />
-        </label>
-
+      {/* Sort Dropdown */}
+      <div className="mb-4 text-right">
         <select
           value={sortOrder}
           onChange={(e) => setSortOrder(e.target.value)}
-          className="border rounded px-3 py-1 text-sm"
+          className="border border-green-700 text-green-700 rounded px-3 py-1"
         >
-          <option value="">Sort by Price</option>
-          <option value="asc">🔼 Price Low to High</option>
-          <option value="desc">🔽 Price High to Low</option>
+          <option value="">-- Sort by Price --</option>
+          <option value="asc">Price: Low to High</option>
+          <option value="desc">Price: High to Low</option>
         </select>
       </div>
 
