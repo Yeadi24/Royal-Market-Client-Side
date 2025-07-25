@@ -11,6 +11,7 @@ const AllUsers = () => {
   const [users, setUsers] = useState([]);
   const [selectedUser, setSelectedUser] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [searchTerm, setSearchTerm] = useState("");
 
   useEffect(() => {
     axios
@@ -22,12 +23,30 @@ const AllUsers = () => {
         toast.error("Failed to fetch users");
       });
   }, []);
+  const fetchUsers = (query = "") => {
+    axios
+      .get(`http://localhost:3000/users?search=${query}`)
+      .then((res) => {
+        setUsers(res.data);
+      })
+      .catch(() => {
+        toast.error("Failed to fetch users");
+      });
+  };
+
+  useEffect(() => {
+    fetchUsers();
+  }, []);
 
   const openRoleModal = (user) => {
     setSelectedUser(user);
     setIsModalOpen(true);
   };
-
+  const handleSearchChange = (e) => {
+    const value = e.target.value;
+    setSearchTerm(value);
+    fetchUsers(value);
+  };
   const handleRoleUpdate = (newRole) => {
     if (!selectedUser) return;
 
@@ -62,6 +81,15 @@ const AllUsers = () => {
 
   return (
     <div className="p-6 bg-green-50 min-h-screen">
+      <div className="flex justify-center mb-6">
+        <input
+          type="text"
+          placeholder="Search by name or email"
+          value={searchTerm}
+          onChange={handleSearchChange}
+          className="w-full md:w-1/2 p-2 border border-green-300 rounded shadow-sm focus:outline-none focus:ring focus:border-green-400"
+        />
+      </div>
       <h2 className="text-3xl font-bold text-green-700 mb-6 text-center">
         All Registered Users
       </h2>

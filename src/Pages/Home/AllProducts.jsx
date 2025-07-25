@@ -9,6 +9,8 @@ const AllProducts = () => {
   const [products, setProducts] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [sortOrder, setSortOrder] = useState("");
+  const [startDate, setStartDate] = useState("");
+  const [endDate, setEndDate] = useState("");
   const navigate = useNavigate();
   const user = use(AuthContext);
 
@@ -33,8 +35,15 @@ const AllProducts = () => {
     navigate(`/details/${id}`);
   };
 
+  // Filter by date range
+  const filteredProducts = products.filter((product) => {
+    if (!startDate || !endDate) return true;
+    const productDate = new Date(product.date).toISOString().split("T")[0];
+    return productDate >= startDate && productDate <= endDate;
+  });
+
   // Sorting logic
-  const sortedProducts = [...products].sort((a, b) => {
+  const sortedProducts = [...filteredProducts].sort((a, b) => {
     if (sortOrder === "asc") return a.pricePerUnit - b.pricePerUnit;
     if (sortOrder === "desc") return b.pricePerUnit - a.pricePerUnit;
     return 0;
@@ -54,17 +63,38 @@ const AllProducts = () => {
         🛍️ All Products
       </h1>
 
-      {/* Sort Dropdown */}
-      <div className="mb-4 text-right">
-        <select
-          value={sortOrder}
-          onChange={(e) => setSortOrder(e.target.value)}
-          className="border border-green-700 text-green-700 rounded px-3 py-1"
-        >
-          <option value="">-- Sort by Price --</option>
-          <option value="asc">Price: Low to High</option>
-          <option value="desc">Price: High to Low</option>
-        </select>
+      {/* Filter & Sort Controls */}
+      <div className="flex flex-wrap justify-between items-center mb-4 gap-4">
+        {/* Date Range Picker */}
+        <div className="flex items-center gap-2">
+          <label className="text-green-700 font-medium">Start:</label>
+          <input
+            type="date"
+            value={startDate}
+            onChange={(e) => setStartDate(e.target.value)}
+            className="border rounded px-2 py-1"
+          />
+          <label className="text-green-700 font-medium">End:</label>
+          <input
+            type="date"
+            value={endDate}
+            onChange={(e) => setEndDate(e.target.value)}
+            className="border rounded px-2 py-1"
+          />
+        </div>
+
+        {/* Sort Dropdown */}
+        <div className="text-right">
+          <select
+            value={sortOrder}
+            onChange={(e) => setSortOrder(e.target.value)}
+            className="border border-green-700 text-green-700 rounded px-3 py-1"
+          >
+            <option value="">-- Sort by Price --</option>
+            <option value="asc">Price: Low to High</option>
+            <option value="desc">Price: High to Low</option>
+          </select>
+        </div>
       </div>
 
       {/* 🧺 Product Grid */}
