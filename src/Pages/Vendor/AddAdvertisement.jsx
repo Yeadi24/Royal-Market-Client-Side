@@ -15,7 +15,6 @@ const AddAdvertisement = () => {
     shortDescription: "",
     imageUrl: "",
     status: "pending",
-    
   });
 
   const handleChange = (e) => {
@@ -39,7 +38,9 @@ const AddAdvertisement = () => {
           body: formDataImg,
         }
       );
+
       const data = await res.json();
+      console.log("imgbb response:", data.data.url);
       if (data.success) {
         setFormData((prev) => ({ ...prev, imageUrl: data.data.url }));
       } else {
@@ -54,11 +55,6 @@ const AddAdvertisement = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (!formData.adTitle || !formData.shortDescription || !formData.imageUrl) {
-      toast.error("Please fill all required fields");
-      return;
-    }
-
     try {
       await axios.post("http://localhost:3000/ads", formData);
       toast.success("Advertisement Added");
@@ -71,7 +67,6 @@ const AddAdvertisement = () => {
           shortDescription: "",
           imageUrl: "",
           status: "pending",
-          
         });
         setImagePreview(null);
       }, 100);

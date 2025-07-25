@@ -11,8 +11,9 @@ const ProductCard = ({ product, onViewDetails }) => {
 
       <div className="space-y-1">
         <h3 className="text-2xl font-bold text-green-800">
-          🛒 {product.marketName}
+          🥦 {product.itemName}
         </h3>
+        <h3 className="text-2xl font-bold">🛒 {product.marketName}</h3>
         <p className="text-xl text-black">
           📅 {new Date(product.date).toDateString()}
         </p>

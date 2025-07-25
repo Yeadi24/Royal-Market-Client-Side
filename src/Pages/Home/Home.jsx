@@ -3,6 +3,10 @@ import Banner from "./Banner";
 import Carousel from "./Carousel";
 import { ToastContainer } from "react-toastify";
 import ProductSection from "./ProductSection";
+import Footer from "../Shared/Footer";
+import AllAds from "./AllAds";
+import Offer from "./Offer";
+import Stats from "./Stats";
 
 const Home = () => {
   document.title = "Home";
@@ -12,6 +16,10 @@ const Home = () => {
       <Banner></Banner>
       <Carousel></Carousel>
       <ProductSection></ProductSection>
+      <AllAds></AllAds>
+      <Offer></Offer>
+      <Stats></Stats>
+      <Footer></Footer>
     </div>
   );
 };

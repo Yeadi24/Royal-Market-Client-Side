@@ -14,6 +14,7 @@ const MyAdvertisements = () => {
   const user = useContext(AuthContext);
   const [ads, setAds] = useState([]);
   const [loading, setLoading] = useState(true);
+  console.log(user.user.email);
 
   useEffect(() => {
     if (user?.user?.email) {
