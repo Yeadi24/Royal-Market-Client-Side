@@ -11,8 +11,13 @@ const Ads = () => {
   // Fetch ads from backend
   const fetchAds = () => {
     setLoading(true);
+    const token = localStorage.getItem("token");
     axios
-      .get("http://localhost:3000/ads")
+      .get("http://localhost:3000/ads", {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
       .then((res) => {
         setAds(res.data);
         setLoading(false);

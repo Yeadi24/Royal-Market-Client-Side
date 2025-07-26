@@ -1,4 +1,4 @@
-import React, { use, useState } from "react";
+import React, { use, useEffect, useState } from "react";
 import axios from "axios";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
@@ -12,8 +12,8 @@ const AddProduct = () => {
   const [marketDate, setMarketDate] = useState(new Date());
   const [imagePreview, setImagePreview] = useState(null);
   const [formData, setFormData] = useState({
-    email: user.user.email,
-    vendorName: user.user.displayName,
+    email: "",
+    vendorName: "",
     marketName: "",
     description: "",
     itemName: "",
@@ -24,7 +24,16 @@ const AddProduct = () => {
     itemDescription: "",
     reviews: [],
   });
-
+  // ✅ Set user email and name after AuthContext loads
+  useEffect(() => {
+    if (user?.user) {
+      setFormData((prev) => ({
+        ...prev,
+        email: user.user.email || "",
+        vendorName: user.user.displayName || "",
+      }));
+    }
+  }, [user]);
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
@@ -72,10 +81,11 @@ const AddProduct = () => {
     };
 
     try {
-      const response = await axios.post(
-        "http://localhost:3000/products",
-        newProduct
-      );
+      if (!formData.imageUrl) {
+        toast.error("Please upload an image before submitting");
+        return;
+      }
+      axios.post("http://localhost:3000/products", newProduct);
       toast.success("Product Added");
       // Swal.fire({
       //   position: "top-end",
@@ -84,22 +94,40 @@ const AddProduct = () => {
       //   showConfirmButton: false,
       //   timer: 1500,
       // });
-      setFormData({
-        email: user.user.email,
-        vendorName: user.user.displayName,
-        marketName: "",
-        description: "",
-        itemName: "",
-        status: "pending",
-        image: null,
-        imageUrl: "",
-        pricePerUnit: "",
-        priceHistory: [],
-        itemDescription: "",
-        reviews: [],
-      });
-      setMarketDate(new Date());
-      setImagePreview(null);
+      // setFormData({
+      //   email: user.user.email,
+      //   vendorName: user.user.displayName,
+      //   marketName: "",
+      //   description: "",
+      //   itemName: "",
+      //   status: "pending",
+      //   image: null,
+      //   imageUrl: "",
+      //   pricePerUnit: "",
+      //   priceHistory: [],
+      //   itemDescription: "",
+      //   reviews: [],
+      // });
+      // setMarketDate(new Date());
+      // setImagePreview(null);
+      // Reset form after short delay
+      setTimeout(() => {
+        setFormData({
+          email: user.user.email,
+          vendorName: user.user.displayName,
+          marketName: "",
+          description: "",
+          itemName: "",
+          status: "pending",
+          image: null,
+          imageUrl: "",
+          pricePerUnit: "",
+          priceHistory: [],
+          itemDescription: "",
+          reviews: [],
+        });
+        setImagePreview(null);
+      }, 100);
     } catch (error) {
       console.error("Error submitting product:", error);
       toast.error("Error submitting product");
@@ -259,7 +287,12 @@ const AddProduct = () => {
 
         <button
           type="submit"
-          className="md:col-span-2 bg-gradient-to-r from-green-500 to-green-700 text-white font-bold p-3 rounded shadow-lg hover:scale-105 hover:from-green-600 transition-all duration-300"
+          disabled={!formData.imageUrl}
+          className={`w-full font-bold p-3 rounded shadow-lg transition-transform ${
+            formData.imageUrl
+              ? "bg-gradient-to-r from-green-500 to-green-700 text-white hover:scale-105"
+              : "bg-gray-400 text-gray-100 cursor-not-allowed"
+          }`}
         >
           Submit Product
         </button>

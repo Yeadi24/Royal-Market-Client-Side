@@ -18,8 +18,13 @@ const MyAdvertisements = () => {
 
   useEffect(() => {
     if (user?.user?.email) {
+      const token = localStorage.getItem("token");
       axios
-        .get(`http://localhost:3000/ads?email=${user.user.email}`)
+        .get(`http://localhost:3000/ads?email=${user.user.email}`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        })
         .then((res) => {
           setAds(res.data);
           setLoading(false);
@@ -105,7 +110,7 @@ const MyAdvertisements = () => {
                         <button
                           className="text-blue-600 hover:text-blue-800"
                           onClick={() =>
-                            navigate(`/vendorDashboard/updateAd/${ad._id}`)
+                            navigate(`/Dashboard/updateAd/${ad._id}`)
                           }
                         >
                           <FaEdit size={18} />

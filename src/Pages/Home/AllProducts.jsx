@@ -16,9 +16,14 @@ const AllProducts = () => {
 
   const fetchProducts = () => {
     const params = {};
-
+    const token = localStorage.getItem("token");
     axios
-      .get("http://localhost:3000/products", { params })
+      .get("http://localhost:3000/products", {
+        params: {}, // You can add your filter/sort here
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
       .then((res) => {
         setProducts(res.data);
         setCurrentPage(1); // Reset to first page on fetch

@@ -16,8 +16,13 @@ const Products = () => {
   }, []);
 
   const fetchProducts = () => {
+    const token = localStorage.getItem("token");
     axios
-      .get("http://localhost:3000/products")
+      .get("http://localhost:3000/products", {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
       .then((res) => setProducts(res.data))
       .catch(() => toast.error("Failed to fetch products"));
   };

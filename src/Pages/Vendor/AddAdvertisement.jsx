@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import { AuthContext } from "../../Contexts/AuthContext";
 import { toast } from "react-toastify";
@@ -7,15 +7,27 @@ import "react-toastify/dist/ReactToastify.css";
 const AddAdvertisement = () => {
   const user = useContext(AuthContext);
   document.title = "Add Ads";
+
   const [imagePreview, setImagePreview] = useState(null);
   const [formData, setFormData] = useState({
-    email: user?.user?.email || "",
-    vendorName: user?.user?.displayName || "",
+    email: "",
+    vendorName: "",
     adTitle: "",
     shortDescription: "",
     imageUrl: "",
     status: "pending",
   });
+
+  // ✅ Set user email and name after AuthContext loads
+  useEffect(() => {
+    if (user?.user) {
+      setFormData((prev) => ({
+        ...prev,
+        email: user.user.email || "",
+        vendorName: user.user.displayName || "",
+      }));
+    }
+  }, [user]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -40,9 +52,13 @@ const AddAdvertisement = () => {
       );
 
       const data = await res.json();
-      console.log("imgbb response:", data.data.url);
+
       if (data.success) {
-        setFormData((prev) => ({ ...prev, imageUrl: data.data.url }));
+        setFormData((prev) => {
+          const updated = { ...prev, imageUrl: data.data.url };
+          console.log("✅ Updated form data with image URL: ", updated);
+          return updated;
+        });
       } else {
         toast.error("Image upload failed");
       }
@@ -55,14 +71,21 @@ const AddAdvertisement = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    // ✅ Prevent submit if image is not uploaded
+    if (!formData.imageUrl) {
+      toast.error("Please upload an image before submitting");
+      return;
+    }
+
     try {
       await axios.post("http://localhost:3000/ads", formData);
       toast.success("Advertisement Added");
-      // Add short delay before clearing
+
+      // Reset form after short delay
       setTimeout(() => {
         setFormData({
-          email: user?.email || "",
-          vendorName: user?.displayName || "",
+          email: user?.user?.email || "",
+          vendorName: user?.user?.displayName || "",
           adTitle: "",
           shortDescription: "",
           imageUrl: "",
@@ -162,7 +185,12 @@ const AddAdvertisement = () => {
 
         <button
           type="submit"
-          className="w-full bg-gradient-to-r from-green-500 to-green-700 text-white font-bold p-3 rounded shadow-lg hover:scale-105 transition-transform"
+          disabled={!formData.imageUrl}
+          className={`w-full font-bold p-3 rounded shadow-lg transition-transform ${
+            formData.imageUrl
+              ? "bg-gradient-to-r from-green-500 to-green-700 text-white hover:scale-105"
+              : "bg-gray-400 text-gray-100 cursor-not-allowed"
+          }`}
         >
           Submit Advertisement
         </button>
