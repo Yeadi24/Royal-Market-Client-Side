@@ -5,6 +5,7 @@ import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 const UpdateAd = () => {
+  document.title = "Update Ad";
   const { id } = useParams();
   const navigate = useNavigate();
   document.title = "Update Ad";

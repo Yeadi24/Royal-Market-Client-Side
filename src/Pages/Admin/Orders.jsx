@@ -6,8 +6,11 @@ const Orders = () => {
   const [orders, setOrders] = useState([]);
 
   useEffect(() => {
+    const token = localStorage.getItem("token");
     axios
-      .get("http://localhost:3000/orders")
+      .get("http://localhost:3000/orders", {
+        headers: { Authorization: `Bearer ${token}` },
+      })
       .then((res) => setOrders(res.data))
       .catch((err) => console.error("Failed to fetch all orders:", err));
   }, []);

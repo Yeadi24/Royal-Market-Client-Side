@@ -3,6 +3,7 @@ import { Link, Outlet, useLocation } from "react-router";
 import axios from "axios";
 
 const PriceTrends = () => {
+  document.title = "Price Trends";
   const [products, setProducts] = useState([]);
   const location = useLocation();
 

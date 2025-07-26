@@ -14,8 +14,11 @@ const AllUsers = () => {
   const [searchTerm, setSearchTerm] = useState("");
 
   useEffect(() => {
+    const token = localStorage.getItem("token");
     axios
-      .get("http://localhost:3000/users")
+      .get("http://localhost:3000/users", {
+        headers: { Authorization: `Bearer ${token}` },
+      })
       .then((res) => {
         setUsers(res.data);
       })

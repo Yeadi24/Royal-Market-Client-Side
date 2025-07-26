@@ -6,6 +6,7 @@ import { useParams } from "react-router";
 const stripePromise = loadStripe(import.meta.env.VITE_publishable_key);
 
 const Payment = () => {
+  document.title = "Payment";
   const { id } = useParams();
   const product_id = id;
 

@@ -6,6 +6,7 @@ import Swal from "sweetalert2";
 import { AuthContext } from "../../Contexts/AuthContext";
 
 const Watchlist = () => {
+  document.title = "WatchList";
   const user = use(AuthContext);
   const [watchlist, setWatchlist] = useState([]);
   const navigate = useNavigate();

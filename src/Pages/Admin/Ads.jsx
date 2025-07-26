@@ -5,6 +5,7 @@ import "react-toastify/dist/ReactToastify.css";
 import Swal from "sweetalert2";
 
 const Ads = () => {
+  document.title = "All Ads";
   const [ads, setAds] = useState([]);
   const [loading, setLoading] = useState(true);
   document.title = "All Ads";

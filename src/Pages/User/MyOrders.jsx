@@ -3,6 +3,7 @@ import axios from "axios";
 import { AuthContext } from "../../Contexts/AuthContext";
 
 const MyOrders = () => {
+  document.title = "My Orders";
   const { user } = use(AuthContext);
   const [orders, setOrders] = useState([]);
   console.log(user.email);
