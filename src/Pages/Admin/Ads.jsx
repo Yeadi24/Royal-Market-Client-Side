@@ -14,7 +14,7 @@ const Ads = () => {
     setLoading(true);
     const token = localStorage.getItem("token");
     axios
-      .get("http://localhost:3000/ads", {
+      .get("https://local-market-server-eight.vercel.app/ads", {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -36,7 +36,9 @@ const Ads = () => {
   // Handle status change
   const handleStatusChange = (id, newStatus) => {
     axios
-      .patch(`http://localhost:3000/ads/${id}`, { status: newStatus })
+      .patch(`https://local-market-server-eight.vercel.app/ads/${id}`, {
+        status: newStatus,
+      })
       .then(() => {
         toast.success(`Advertisement ${newStatus}`);
         fetchAds();
@@ -56,7 +58,7 @@ const Ads = () => {
       confirmButtonText: "Yes, delete it!",
     }).then((result) => {
       if (result.isConfirmed) {
-        fetch(`http://localhost:3000/ads/${id}`, {
+        fetch(`https://local-market-server-eight.vercel.app/ads/${id}`, {
           method: "DELETE",
         })
           .then((res) => res.json())

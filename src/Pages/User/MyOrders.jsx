@@ -10,7 +10,9 @@ const MyOrders = () => {
   useEffect(() => {
     if (user && user.email) {
       axios
-        .get(`http://localhost:3000/orders?email=${user.email}`)
+        .get(
+          `https://local-market-server-eight.vercel.app/orders?email=${user.email}`
+        )
         .then((res) => setOrders(res.data))
         .catch((err) => console.error("Failed to fetch orders:", err));
     }

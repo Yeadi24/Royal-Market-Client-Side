@@ -9,7 +9,7 @@ const PriceTrends = () => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:3000/products/approved")
+      .get("https://local-market-server-eight.vercel.app/products/approved")
       .then((res) => setProducts(res.data))
       .catch(() => console.error("Failed to load products"));
   }, []);

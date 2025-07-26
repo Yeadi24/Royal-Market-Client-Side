@@ -30,15 +30,17 @@ const Details = () => {
   const { role, loading, error } = useGetRole(user.email);
 
   useEffect(() => {
-    axios.get(`http://localhost:3000/products/${id}`).then((res) => {
-      setProduct(res.data);
-    });
+    axios
+      .get(`https://local-market-server-eight.vercel.app/products/${id}`)
+      .then((res) => {
+        setProduct(res.data);
+      });
   }, [id]);
 
   const handleAddToWatchlist = async () => {
     try {
       await axios.patch(
-        `http://localhost:3000/users/${user.email}/watchlist`,
+        `https://local-market-server-eight.vercel.app/users/${user.email}/watchlist`,
         product
       );
       toast.success("Added to Watchlist");
@@ -58,7 +60,7 @@ const Details = () => {
 
     try {
       await axios.patch(
-        `http://localhost:3000/products/${id}/addReview`,
+        `https://local-market-server-eight.vercel.app/products/${id}/addReview`,
         review
       );
       toast.success("Review submitted");

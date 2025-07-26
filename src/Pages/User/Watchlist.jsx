@@ -15,7 +15,9 @@ const Watchlist = () => {
   useEffect(() => {
     if (user?.user?.email) {
       axios
-        .get(`http://localhost:3000/users/${user?.user?.email}`)
+        .get(
+          `https://local-market-server-eight.vercel.app/users/${user?.user?.email}`
+        )
         .then((res) => {
           setWatchlist(res.data.watchlist || []);
         })
@@ -34,7 +36,7 @@ const Watchlist = () => {
       if (result.isConfirmed) {
         try {
           await axios.patch(
-            `http://localhost:3000/users/${user?.user?.email}/removeWatchlist`,
+            `https://local-market-server-eight.vercel.app/users/${user?.user?.email}/removeWatchlist`,
             { productId }
           );
 

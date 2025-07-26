@@ -10,7 +10,7 @@ const useGetRole = (email) => {
     if (!email) return;
     setLoading(true);
     axios
-      .get(`http://localhost:3000/users/role/${email}`)
+      .get(`https://local-market-server-eight.vercel.app/users/role/${email}`)
       .then((res) => {
         setRole(res.data.role);
         setError(null);

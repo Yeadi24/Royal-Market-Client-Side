@@ -8,7 +8,7 @@ const Orders = () => {
   useEffect(() => {
     const token = localStorage.getItem("token");
     axios
-      .get("http://localhost:3000/orders", {
+      .get("https://local-market-server-eight.vercel.app/orders", {
         headers: { Authorization: `Bearer ${token}` },
       })
       .then((res) => setOrders(res.data))

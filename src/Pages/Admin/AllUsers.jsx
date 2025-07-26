@@ -16,7 +16,7 @@ const AllUsers = () => {
   useEffect(() => {
     const token = localStorage.getItem("token");
     axios
-      .get("http://localhost:3000/users", {
+      .get("https://local-market-server-eight.vercel.app/users", {
         headers: { Authorization: `Bearer ${token}` },
       })
       .then((res) => {
@@ -28,7 +28,7 @@ const AllUsers = () => {
   }, []);
   const fetchUsers = (query = "") => {
     axios
-      .get(`http://localhost:3000/users?search=${query}`)
+      .get(`https://local-market-server-eight.vercel.app/users?search=${query}`)
       .then((res) => {
         setUsers(res.data);
       })
@@ -54,9 +54,12 @@ const AllUsers = () => {
     if (!selectedUser) return;
 
     axios
-      .patch(`http://localhost:3000/users/${selectedUser._id}`, {
-        role: newRole,
-      })
+      .patch(
+        `https://local-market-server-eight.vercel.app/users/${selectedUser._id}`,
+        {
+          role: newRole,
+        }
+      )
       .then((res) => {
         if (res.data.modifiedCount > 0) {
           setUsers((prev) =>

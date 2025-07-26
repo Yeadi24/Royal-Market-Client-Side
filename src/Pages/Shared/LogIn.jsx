@@ -43,7 +43,7 @@ const Login = () => {
 
         // Save to MongoDB
         axios
-          .post("http://localhost:3000/users", newUser)
+          .post("https://local-market-server-eight.vercel.app/users", newUser)
           .then((res) => {
             console.log("Google user saved to DB:", res.data);
           })

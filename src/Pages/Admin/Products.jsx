@@ -18,7 +18,7 @@ const Products = () => {
   const fetchProducts = () => {
     const token = localStorage.getItem("token");
     axios
-      .get("http://localhost:3000/products", {
+      .get("https://local-market-server-eight.vercel.app/products", {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -29,7 +29,9 @@ const Products = () => {
 
   const handleStatusChange = (id, newStatus) => {
     axios
-      .patch(`http://localhost:3000/products/${id}`, { status: newStatus })
+      .patch(`https://local-market-server-eight.vercel.app/products/${id}`, {
+        status: newStatus,
+      })
       .then(() => {
         toast.success(`Product ${newStatus}`);
         fetchProducts();
@@ -48,7 +50,7 @@ const Products = () => {
       confirmButtonText: "Yes, delete it!",
     }).then((result) => {
       if (result.isConfirmed) {
-        fetch(`http://localhost:3000/products/${id}`, {
+        fetch(`https://local-market-server-eight.vercel.app/products/${id}`, {
           method: "DELETE",
         })
           .then((res) => res.json())

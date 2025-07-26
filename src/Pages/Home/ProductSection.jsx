@@ -14,11 +14,14 @@ const ProductSection = () => {
   useEffect(() => {
     const token = localStorage.getItem("token");
     axios
-      .get("http://localhost:3000/products?status=approved&limit=100", {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      })
+      .get(
+        "https://local-market-server-eight.vercel.app/products?status=approved&limit=100",
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      )
       .then((res) => {
         const today = new Date().toISOString().split("T")[0];
         const filtered = res.data.filter((p) => {

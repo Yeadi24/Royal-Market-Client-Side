@@ -32,7 +32,7 @@ const UpdateProduct = () => {
   // Fetch the product data on mount
   useEffect(() => {
     axios
-      .get(`http://localhost:3000/products/${id}`)
+      .get(`https://local-market-server-eight.vercel.app/products/${id}`)
       .then((res) => {
         const data = res.data;
         setFormData({
@@ -109,7 +109,10 @@ const UpdateProduct = () => {
     };
 
     try {
-      await axios.put(`http://localhost:3000/products/${id}`, updatedProduct);
+      await axios.put(
+        `https://local-market-server-eight.vercel.app/products/${id}`,
+        updatedProduct
+      );
 
       // Clear form
       setFormData({

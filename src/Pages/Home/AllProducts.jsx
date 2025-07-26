@@ -18,7 +18,7 @@ const AllProducts = () => {
     const params = {};
     const token = localStorage.getItem("token");
     axios
-      .get("http://localhost:3000/products", {
+      .get("https://local-market-server-eight.vercel.app/products", {
         params: {}, // You can add your filter/sort here
         headers: {
           Authorization: `Bearer ${token}`,

@@ -17,7 +17,9 @@ const MyProducts = () => {
   useEffect(() => {
     if (user?.user?.email) {
       axios
-        .get(`http://localhost:3000/products?email=${user.user.email}`)
+        .get(
+          `https://local-market-server-eight.vercel.app/products?email=${user.user.email}`
+        )
         .then((res) => setProducts(res.data))
         .catch((err) => console.error(err));
     }
@@ -33,7 +35,7 @@ const MyProducts = () => {
       confirmButtonText: "Yes, delete it!",
     }).then((result) => {
       if (result.isConfirmed) {
-        fetch(`http://localhost:3000/products/${id}`, {
+        fetch(`https://local-market-server-eight.vercel.app/products/${id}`, {
           method: "DELETE",
         })
           .then((res) => res.json())

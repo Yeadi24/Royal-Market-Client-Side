@@ -17,7 +17,7 @@ const TrendGraph = () => {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:3000/products/${productId}`)
+      .get(`https://local-market-server-eight.vercel.app/products/${productId}`)
       .then((res) => {
         const d = res.data;
         setProduct(d);

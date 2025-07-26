@@ -7,8 +7,13 @@ const AllAds = () => {
   const [ads, setAds] = useState([]);
 
   useEffect(() => {
+    const token = localStorage.getItem("token");
     axios
-      .get("http://localhost:3000/ads") // adjust if your backend URL is different
+      .get("https://local-market-server-eight.vercel.app/ads", {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }) // adjust if your backend URL is different
       .then((res) => {
         const slicedAds = res.data.slice(0, 6);
         setAds(slicedAds);

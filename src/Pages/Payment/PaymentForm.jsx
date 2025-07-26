@@ -16,7 +16,9 @@ const PaymentForm = ({ product_id }) => {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:3000/products/${product_id}`)
+      .get(
+        `https://local-market-server-eight.vercel.app/products/${product_id}`
+      )
       .then((res) => {
         setProduct(res.data);
         console.log("Fetched product:", res.data);
@@ -52,7 +54,7 @@ const PaymentForm = ({ product_id }) => {
 
     // step-2: create payment intent
     const res = await axios.post(
-      "http://localhost:3000/create-payment-intent",
+      "https://local-market-server-eight.vercel.app/create-payment-intent",
       {
         price: price,
       }
@@ -97,7 +99,10 @@ const PaymentForm = ({ product_id }) => {
         console.log(paymentInfo);
         // Axios POST
         axios
-          .post("http://localhost:3000/orders", paymentInfo)
+          .post(
+            "https://local-market-server-eight.vercel.app/orders",
+            paymentInfo
+          )
           .then((res) => {
             console.log("Order saved:", res.data);
             // Show toast or navigate if needed

@@ -85,7 +85,10 @@ const AddProduct = () => {
         toast.error("Please upload an image before submitting");
         return;
       }
-      axios.post("http://localhost:3000/products", newProduct);
+      axios.post(
+        "https://local-market-server-eight.vercel.app/products",
+        newProduct
+      );
       toast.success("Product Added");
       // Swal.fire({
       //   position: "top-end",

@@ -78,7 +78,10 @@ const AddAdvertisement = () => {
     }
 
     try {
-      await axios.post("http://localhost:3000/ads", formData);
+      await axios.post(
+        "https://local-market-server-eight.vercel.app/ads",
+        formData
+      );
       toast.success("Advertisement Added");
 
       // Reset form after short delay

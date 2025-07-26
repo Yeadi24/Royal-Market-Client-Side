@@ -20,11 +20,14 @@ const MyAdvertisements = () => {
     if (user?.user?.email) {
       const token = localStorage.getItem("token");
       axios
-        .get(`http://localhost:3000/ads?email=${user.user.email}`, {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        })
+        .get(
+          `https://local-market-server-eight.vercel.app/ads?email=${user.user.email}`,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        )
         .then((res) => {
           setAds(res.data);
           setLoading(false);
@@ -47,7 +50,7 @@ const MyAdvertisements = () => {
       confirmButtonText: "Yes, delete it!",
     }).then((result) => {
       if (result.isConfirmed) {
-        fetch(`http://localhost:3000/ads/${id}`, {
+        fetch(`https://local-market-server-eight.vercel.app/ads/${id}`, {
           method: "DELETE",
         })
           .then((res) => res.json())

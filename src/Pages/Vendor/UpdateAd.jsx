@@ -23,7 +23,7 @@ const UpdateAd = () => {
   // Fetch the ad data
   useEffect(() => {
     axios
-      .get(`http://localhost:3000/ads/${id}`)
+      .get(`https://local-market-server-eight.vercel.app/ads/${id}`)
       .then((res) => {
         setFormData(res.data);
         setImagePreview(res.data.imageUrl);
@@ -79,7 +79,10 @@ const UpdateAd = () => {
     }
 
     try {
-      await axios.put(`http://localhost:3000/ads/${id}`, formData);
+      await axios.put(
+        `https://local-market-server-eight.vercel.app/ads/${id}`,
+        formData
+      );
       toast.success("Advertisement updated successfully");
       navigate("/vendorDashboard/myAdvertisements");
     } catch (err) {

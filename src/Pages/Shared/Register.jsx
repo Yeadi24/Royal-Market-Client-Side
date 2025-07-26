@@ -28,7 +28,7 @@ const Register = () => {
 
         // Save to MongoDB
         axios
-          .post("http://localhost:3000/users", newUser)
+          .post("https://local-market-server-eight.vercel.app/users", newUser)
           .then((res) => {
             console.log("Google user saved to DB:", res.data);
           })
@@ -100,7 +100,10 @@ const Register = () => {
 
               //  Save user in MongoDB via Axios
               axios
-                .post("http://localhost:3000/users", userInfo)
+                .post(
+                  "https://local-market-server-eight.vercel.app/users",
+                  userInfo
+                )
                 .then((res) => {
                   console.log("User saved to MongoDB:", res.data);
                 })
