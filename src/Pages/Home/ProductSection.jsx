@@ -12,15 +12,9 @@ const ProductSection = () => {
   const user = use(AuthContext);
 
   useEffect(() => {
-    const token = localStorage.getItem("token");
     axios
       .get(
-        "https://local-market-server-eight.vercel.app/products?status=approved&limit=100",
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
+        "https://local-market-server-eight.vercel.app/products?status=approved&limit=100"
       )
       .then((res) => {
         const today = new Date().toISOString().split("T")[0];

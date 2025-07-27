@@ -1,12 +1,67 @@
-# React + Vite
+# 🛒 Local Market
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+**Local Market** is a modern, full-stack web application where vendors can list their market products and users can browse, search, and buy them. Built for transparency and accessibility in local trading, this platform simplifies product discovery and price comparison across local vendors.
 
-Currently, two official plugins are available:
+🌐 **Live Site:** [https://local-market-auth.web.app/]
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+---
 
-## Expanding the ESLint configuration
+## 📌 Purpose
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+The goal of Local Market is to:
+
+- Bridge the gap between local vendors and buyers.
+- Offer real-time product listing with dynamic price updates.
+- Provide secure login and user management using Firebase and JWT.
+- Enable ad posting, order management, and price history tracking for market insights.
+
+---
+
+## 🚀 Key Features
+
+✅ Firebase-based user authentication (email & Google login)  
+✅ JWT authentication with token stored in `localStorage`  
+✅ Secure private routes and role-based access control  
+✅ MongoDB with native driver (no Mongoose)  
+✅ Product listing with filters, sorting (price low-high / high-low), and date range  
+✅ Advertisement system (approved ads shown to users)  
+✅ Dashboard for admins and vendors  
+✅ Stripe payment integration  
+✅ Toast notifications for actions and feedback  
+✅ Responsive design for mobile & desktop
+
+---
+
+## 🧱 Tech Stack
+
+### Frontend:
+
+- **React**
+- **Firebase Auth**
+- **React Router DOM**
+- **Axios**
+- **React Toastify**
+- **Tailwind CSS**
+- **Stripe.js**
+
+### Backend:
+
+- **Express.js**
+- **MongoDB Native Driver**
+- **dotenv**
+- **cors**
+- **jsonwebtoken**
+- **cookie-parser**
+- **stripe**
+
+---
+
+## 📦 NPM Packages Used
+
+# Frontend
+
+axios firebase react-toastify react-router-dom stripe
+
+# Backend
+
+install express mongodb dotenv cors jsonwebtoken cookie-parser stripe

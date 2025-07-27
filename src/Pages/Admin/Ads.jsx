@@ -12,13 +12,9 @@ const Ads = () => {
   // Fetch ads from backend
   const fetchAds = () => {
     setLoading(true);
-    const token = localStorage.getItem("token");
+
     axios
-      .get("https://local-market-server-eight.vercel.app/ads", {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      })
+      .get("https://local-market-server-eight.vercel.app/ads")
       .then((res) => {
         setAds(res.data);
         setLoading(false);

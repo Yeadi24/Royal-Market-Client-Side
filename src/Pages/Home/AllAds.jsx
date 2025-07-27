@@ -7,13 +7,8 @@ const AllAds = () => {
   const [ads, setAds] = useState([]);
 
   useEffect(() => {
-    const token = localStorage.getItem("token");
     axios
-      .get("https://local-market-server-eight.vercel.app/ads", {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      }) // adjust if your backend URL is different
+      .get("https://local-market-server-eight.vercel.app/ads") // adjust if your backend URL is different
       .then((res) => {
         const slicedAds = res.data.slice(0, 6);
         setAds(slicedAds);
@@ -24,10 +19,15 @@ const AllAds = () => {
   }, []);
 
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 p-4">
-      {ads.map((ad, index) => (
-        <AdCard key={index} ad={ad} />
-      ))}
+    <div>
+      <h2 className="text-3xl font-bold text-center text-green-800 mb-6">
+        Advertisement Highlights
+      </h2>
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 p-4">
+        {ads.map((ad, index) => (
+          <AdCard key={index} ad={ad} />
+        ))}
+      </div>
     </div>
   );
 };

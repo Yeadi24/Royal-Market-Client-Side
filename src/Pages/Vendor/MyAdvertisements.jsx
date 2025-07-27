@@ -18,15 +18,9 @@ const MyAdvertisements = () => {
 
   useEffect(() => {
     if (user?.user?.email) {
-      const token = localStorage.getItem("token");
       axios
         .get(
-          `https://local-market-server-eight.vercel.app/ads?email=${user.user.email}`,
-          {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          }
+          `https://local-market-server-eight.vercel.app/ads?email=${user.user.email}`
         )
         .then((res) => {
           setAds(res.data);

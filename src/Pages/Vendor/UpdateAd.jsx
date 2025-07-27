@@ -84,7 +84,7 @@ const UpdateAd = () => {
         formData
       );
       toast.success("Advertisement updated successfully");
-      navigate("/vendorDashboard/myAdvertisements");
+      navigate("/dashboard/myAdvertisements");
     } catch (err) {
       console.error(err);
       toast.error("Failed to update advertisement");

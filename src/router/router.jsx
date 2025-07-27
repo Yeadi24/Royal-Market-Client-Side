@@ -27,6 +27,7 @@ import Watchlist from "../Pages/User/Watchlist";
 import AllProducts from "../Pages/Home/AllProducts";
 import Payment from "../Pages/Payment/Payment";
 import MyOrders from "../Pages/User/MyOrders";
+import NotFound from "../Pages/Shared/NotFound";
 export const router = createBrowserRouter([
   {
     path: "/",
@@ -200,5 +201,9 @@ export const router = createBrowserRouter([
         ),
       },
     ],
+  },
+  {
+    path: "*",
+    Component: NotFound,
   },
 ]);

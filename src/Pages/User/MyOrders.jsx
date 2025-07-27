@@ -9,9 +9,15 @@ const MyOrders = () => {
   console.log(user.email);
   useEffect(() => {
     if (user && user.email) {
+      const token = localStorage.getItem("token");
       axios
         .get(
-          `https://local-market-server-eight.vercel.app/orders?email=${user.email}`
+          `https://local-market-server-eight.vercel.app/orders?email=${user.email}`,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
         )
         .then((res) => setOrders(res.data))
         .catch((err) => console.error("Failed to fetch orders:", err));
